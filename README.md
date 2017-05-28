@@ -21,5 +21,6 @@ Please always test new management packs in a test environment before importing t
 3. Import the management packs into SCOM, navigate to %ProgramFiles%\QueryOleDbMonitoring\ManagmentPasks
 4. Run As Administrator %ProgramFiles%\QueryOleDbMonitoring\ManageSCOMOleDbQueryMonitor.exe
 5. At first time execution fill SCOM Server.
+![ConnectionServer](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide1.GIF)
 6. Click on Add Query
 7. Follow to wizard
