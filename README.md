@@ -1,4 +1,6 @@
 # Query OleDB monitor
-## What is it?
-This is a extenaion tool  monitor Applications Using-SQL-Queries
+A Management Pack and SCOM extenaion tool created by Uretzky Zvi for monitoring SQL queries with System Center Operations Manager.
+
+## Features
+* Easy Tool for create and delete
 
