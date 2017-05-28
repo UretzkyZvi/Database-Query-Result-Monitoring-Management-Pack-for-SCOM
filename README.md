@@ -37,7 +37,7 @@ Please always test new management packs in a test environment before importing t
 7. Follow to wizard
   * Select DBEngine
   ![SelectDBEngine](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide3.GIF)
-  * Write Query (Importent! make sure the result query return single numeric value), check connection by click on link
+  * Write Query (Importent! make sure the query return result is a single numeric value), check connection by click on link
   ![SelectDatabase](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide4.GIF)
   ![query](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide5.GIF)
   * Define Monitor, fill a friendly query name, group name for grouping purpose, for readable alert write your error message and
