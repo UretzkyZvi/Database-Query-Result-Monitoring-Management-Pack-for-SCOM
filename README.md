@@ -23,4 +23,22 @@ Please always test new management packs in a test environment before importing t
 5. At first time execution fill SCOM Server.
 ![ConnectionServer](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide1.GIF)
 6. Click on Add Query
+![AddQuery](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide2.GIF)
 7. Follow to wizard
+  * Select DBEngine
+  ![SelectDBEngine](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide3.GIF)
+  * Write Query (Importent! make sure the result query return single numeric value), check connection by click on link
+  ![SelectDatabase](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide4.GIF)
+  ![query](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide5.GIF)
+  * Define Monitor, fill a friendly query name, group name for grouping purpose, for readable alert write your error message and
+  give a name for the numric value that return from query, for performance collection.
+  ![monitor](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide6.GIF)
+  * Click on Finsh
+  ![Finish](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide7.GIF)
+ 8. Click on Refersh button
+  ![Refersh](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide8.GIF)
+ 9. Open SCOM console, see new folder
+  ![Folder](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide11.GIF) 
+ 10. Enjoy!
+  
+  
