@@ -28,8 +28,8 @@ Please always test new management packs in a test environment before importing t
 ## Quick Start - Install
 1. Download QueryOleDbMonitorSetup.msi
 2. Run As Administrator the msi file.
-3. Import the management packs into SCOM, navigate to %ProgramFiles%\QueryOleDbMonitoring\ManagmentPasks
-4. Run As Administrator %ProgramFiles%\QueryOleDbMonitoring\ManageSCOMOleDbQueryMonitor.exe
+3. Import the management packs into SCOM, navigate to C:\Program Files (x86)\QueryOleDbMonitoring\ManagmentPasks
+4. Run As Administrator C:\Program Files (x86)\QueryOleDbMonitoring\ManageSCOMOleDbQueryMonitor.exe
 5. At first time execution fill SCOM Server.
 ![ConnectionServer](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide1.GIF)
 6. Click on Add Query
