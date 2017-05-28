@@ -47,7 +47,9 @@ Please always test new management packs in a test environment before importing t
  8. Now To see your query in console just click on Refersh button
   ![Refersh](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide8.GIF)
  9. Open SCOM console, see new folder
-  ![Folder](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide11.GIF) 
- 10. Enjoy!
+  ![Folder](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide11.GIF)
+ 10. Alert example
+  ![Alert](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/Slide10.GIF)
+ 11. Enjoy!
   
   
