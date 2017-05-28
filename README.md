@@ -1,6 +1,13 @@
 # Query OleDB monitor
 A Management Pack and SCOM extenaion tool created by Uretzky Zvi for monitoring SQL queries with System Center Operations Manager.
 
+If you use this and don't hate it, buy me a beer :-)
+Bitcoin Address: 1HPXi5M38F9zCtp1nciaGc15JdR48DrgVv
+Ethereum Address: 0x6a34dab1c1e655bb1fab6279204c3eb4ea840e48
+
+##License
+![License](https://github.com/uretskyzvi/Monitor-Applications-Using-SQL-Queries/blob/master/LICENSE)
+
 ## Features
 * Easy tool to create and delete queries.
 * Dedicated Views in SCOM Console.
