@@ -1,0 +1,186 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <MonitorTypes>
+
+      <UnitMonitorType Accessibility="Public" ID="OleDbQueryMonitorConsecutiveUnitMonitorType" RunAs="OleDBQueryMonitoringRunAsProfile">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="OK" />
+          <MonitorTypeState ID="ERROR" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="StartDay" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="EndDay" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="DaysOfWeekMask" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Threshold" type="xsd:double"/>
+          <xsd:element minOccurs="1" name="NumSamples" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="MetricType" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Direction" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ErrorMessage" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          
+        </Configuration>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource TypeID="OleDbQueryMonitorMapperWithDateCondtion" ID="DS">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <ConnectionString>$Config/ConnectionString$</ConnectionString>
+              <Query>$Config/Query$</Query>
+              <StartDay>$Config/StartDay$</StartDay>
+              <EndDay>$Config/EndDay$</EndDay>
+              <DaysOfWeekMask>$Config/DaysOfWeekMask$</DaysOfWeekMask>
+              <QueryName>$Config/QueryName$</QueryName>
+            </DataSource>
+            <ProbeAction TypeID="OleDbQueryMonitorPerformanceCollectionProbe" ID="ProbeOnDemand">
+              <ConnectionString>$Config/ConnectionString$</ConnectionString>
+              <Query>$Config/Query$</Query>
+              <QueryName>$Config/QueryName$</QueryName>
+            </ProbeAction>
+            <ProbeAction ID="OutputDetails" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagProbe">
+              <ScriptName>OutputDetails.ps1</ScriptName>
+              <ScriptBody>
+                param($value, $threshold, $numberOfSamples,$MetricType,$LastValue,$ErrorMessage,$Direction,$QueryName,$Query,$ConnectionString)
+
+                $api = new-object -comObject 'MOM.ScriptAPI'
+
+                $propertyBag = $api.CreatePropertyBag()
+
+                $propertyBag.AddValue("Value", $value)
+
+                $propertyBag.AddValue("Threshold", $threshold)
+
+                $propertyBag.AddValue("NumberOfSamples", $numberOfSamples)
+
+                $propertyBag.AddValue("MetricType", $MetricType)
+
+                $propertyBag.AddValue("ErrorMessage", $ErrorMessage)
+
+                $propertyBag.AddValue("Direction", $Direction)
+
+                $propertyBag.AddValue("QueryName", $QueryName)
+
+                $propertyBag.AddValue("Query", $Query)
+
+                $propertyBag.AddValue("ConnectionString", $ConnectionString)
+
+                $propertyBag
+              </ScriptBody>
+              <SnapIns/>
+              <Parameters>
+                <Parameter>
+                  <Name>value</Name>
+                  <Value>$Data/SampleValue$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>threshold</Name>
+                  <Value>$Config/Threshold$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>numberOfSamples</Name>
+                  <Value>$Config/NumSamples$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>MetricType</Name>
+                  <Value>$Config/MetricType$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>ErrorMessage</Name>
+                  <Value>$Config/ErrorMessage$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>Direction</Name>
+                  <Value>$Config/Direction$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>QueryName</Name>
+                  <Value>$Config/QueryName$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>Query</Name>
+                  <Value>$Config/Query$</Value>
+                </Parameter>
+                <Parameter>
+                  <Name>ConnectionString</Name>
+                  <Value>$Config/ConnectionString$</Value>
+                </Parameter>
+              </Parameters>
+              <TimeoutSeconds>300</TimeoutSeconds>
+              <StrictErrorHandling>true</StrictErrorHandling>
+            </ProbeAction>
+            <ConditionDetection TypeID="Perf!System.Performance.ConsecutiveSamplesCondition" ID="Consecutive">
+              <Threshold>$Config/Threshold$</Threshold>
+              <Direction>$Config/Direction$</Direction>
+            </ConditionDetection>
+            <ConditionDetection ID="ConditionOK" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery>Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Less</Operator>
+                  <ValueExpression>
+                    <Value>$Config/NumSamples$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="ConditionError" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery>Value</XPathQuery>
+                  </ValueExpression>
+                  <Operator>GreaterEqual</Operator>
+                  <ValueExpression>
+                    <Value>$Config/NumSamples$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="OK">
+              <Node ID="ConditionOK">
+                <Node ID="Consecutive">
+                  <Node ID="DS"/>
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ERROR">
+              <Node ID="OutputDetails">
+                <Node ID="ConditionError">
+                  <Node ID="Consecutive">
+                    <Node ID="DS"/>
+                  </Node>
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="OK">
+               <Node ID="ConditionOK">
+                <Node ID="Consecutive">
+                  <Node ID="ProbeOnDemand"/>
+                </Node>
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="ERROR">
+               <Node ID="OutputDetails">
+                <Node ID="ConditionError">
+                  <Node ID="Consecutive">
+                    <Node ID="ProbeOnDemand"/>
+                  </Node>
+                </Node>
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+
+    </MonitorTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

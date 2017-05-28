@@ -1,0 +1,111 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      
+      <ClassTypes>
+        <ClassType ID="OleDBQueryMonitoring" Base="Windows!Microsoft.Windows.LocalApplication" Abstract="false" Accessibility="Public" Singleton="false" Hosted="true">
+          <Property Type="guid"   ID ="UniqueID" Key="true"/>
+          <Property Type="string" ID ="Instance" Key="false"/>
+          <Property Type="string" ID ="Database" Key="false"/>
+          <Property Type="string" ID ="QueryName" Key="false"/>
+          <Property Type="string" ID ="StartDay" Key="false"/>
+          <Property Type="string" ID ="EndDay" Key="false"/>
+          <Property Type="string" ID ="SyncTime" Key="false"/>
+          <Property Type="int"    ID ="IntervalSeconds" Key="false"/>
+          <Property Type="string" ID ="Query" Key="false" MaxLength="1024"/>
+          <Property Type="int"    ID ="DaysOfWeekMask" Key="false"/>
+          <Property Type="string" ID ="GroupName" Key="false"/>
+          <Property Type="string" ID ="Direction" Key="false"/>
+          <Property Type="string" ID ="ErrorMessage" Key="false"/>
+          <Property Type="string" ID ="MetricType" Key="false"/>
+          <Property Type="int"    ID ="Samples" Key="false"/>
+          <Property Type="double" ID ="Threshold" Key="false"/>
+        </ClassType>
+        <ClassType ID="OleDBQueryMonitoringGroup" Accessibility="Public" Base="Group!Microsoft.SystemCenter.InstanceGroup" Abstract="false" Hosted="false" Singleton="false">
+          <Property Type="string" ID ="Name" Key="true"/>
+        </ClassType>
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" Abstract="false" Accessibility="Public" Base="System!System.Containment">
+          <Source Type="OleDBQueryMonitoringGroup" ID="Source" />
+          <Target Type="OleDBQueryMonitoring" ID="Target" />
+        </RelationshipType>
+      </RelationshipTypes>
+    </EntityTypes>
+    <SecureReferences>
+      <SecureReference Accessibility="Public" ID="OleDBQueryMonitoringRunAsProfile" />
+    </SecureReferences>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="OleDBQueryMonitoringRunAsProfile">
+          <Name>OleDB Query Monitoring Run As Profile</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring">
+          <Name>OleDB Query Monitoring Instance</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="UniqueID">
+          <Name>UniqueID</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Instance">
+          <Name>Instance</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Database">
+          <Name>Database</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="QueryName">
+          <Name>Query Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="StartDay">
+          <Name>Start Time</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="EndDay">
+          <Name>End Time</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="SyncTime">
+          <Name>Sync Time</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Query">
+          <Name>Query</Name>
+          <Description>Note: Query result have to be one single row and column</Description>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="DaysOfWeekMask">
+          <Name>Days Of Week Mask</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="GroupName">
+          <Name>Group Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Direction">
+          <Name>Direction</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="ErrorMessage">
+          <Name>Error Message</Name>
+          <Description>Uses for meaningful alerts</Description>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="MetricType">
+          <Name>MetricType</Name>
+          <Description>Describe query result metric</Description>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Samples">
+          <Name>Samples</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Threshold">
+          <Name>Threshold</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringGroup" SubElementID="Name">
+          <Name>Group Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringGroup" >
+          <Name>OleDB Query Monitoring Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" >
+          <Name>OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

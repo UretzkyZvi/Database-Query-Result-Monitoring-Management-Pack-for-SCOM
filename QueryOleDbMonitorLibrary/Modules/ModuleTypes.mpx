@@ -1,0 +1,164 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+
+      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorMapperWithDateCondtion">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="StartDay" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="EndDay" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="DaysOfWeekMask" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="OleDbQueryMonitorPerformanceCollection">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+                <ConnectionString>$Config/ConnectionString$</ConnectionString>
+                <Query>$Config/Query$</Query>
+                <QueryName>$Config/QueryName$</QueryName>
+              </DataSource>
+              <ConditionDetection ID="FILTERTIMER" TypeID="System!System.SchedulerFilter">
+                <SchedulerFilter>
+                  <ProcessDataMode>OnSchedule</ProcessDataMode>
+                  <Schedule>
+                    <WeeklySchedule>
+                      <Windows>
+                        <Daily>
+                          <Start>$Config/StartDay$</Start>
+                          <End>$Config/EndDay$</End>
+                          <DaysOfWeekMask>$Config/DaysOfWeekMask$</DaysOfWeekMask>
+                        </Daily>
+                      </Windows>
+                    </WeeklySchedule>
+                    <ExcludeDates/>
+                  </Schedule>
+                  <UseCurrentTime>true</UseCurrentTime>
+                </SchedulerFilter>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="FILTERTIMER">
+                <Node ID="DS"/>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+
+      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollection">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="PR" TypeID="OleDbQueryMonitorDataSource">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+                <ConnectionString>$Config/ConnectionString$</ConnectionString>
+                <Query>$Config/Query$</Query>
+              </DataSource>
+              <ConditionDetection TypeID="Perf!System.Performance.DataGenericMapper" ID="mapper">
+                <ObjectName>OleDbQueryMonitor</ObjectName>
+                <CounterName>Result</CounterName>
+                <InstanceName>$Config/QueryName$</InstanceName>
+                <Value>$Data/Columns[1]/Column[1]$</Value>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="mapper">
+                <Node ID="PR"/>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+
+      <DataSourceModuleType ID="OleDbQueryMonitorDataSource" Accessibility="Public" Batching="false">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="TIMER" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PR" TypeID="System!System.OleDbProbe">
+                <ConnectionString>$Config/ConnectionString$</ConnectionString>
+                <Query>$Config/Query$</Query>
+                <GetValue>true</GetValue>
+                <OneRowPerItem>true</OneRowPerItem>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PR">
+                <Node ID="TIMER" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.OleDbData</OutputType>
+      </DataSourceModuleType>
+
+      <ProbeActionModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollectionProbe">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="PassThrough" TypeID="System!System.PassThroughProbe" />
+              <ProbeAction ID="PR" TypeID="System!System.OleDbProbe">
+                <ConnectionString>$Config/ConnectionString$</ConnectionString>
+                <Query>$Config/Query$</Query>
+                <GetValue>true</GetValue>
+                <OneRowPerItem>true</OneRowPerItem>
+              </ProbeAction>
+              <ConditionDetection TypeID="Perf!System.Performance.DataGenericMapper" ID="mapper">
+                <ObjectName>OleDbQueryMonitor</ObjectName>
+                <CounterName>Result</CounterName>
+                <InstanceName>$Config/QueryName$</InstanceName>
+                <Value>$Data/Columns[1]/Column[1]$</Value>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="mapper">
+                <Node ID="PR">
+                  <Node ID="PassThrough"/>
+                </Node>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Perf!System.Performance.Data</OutputType>
+        <TriggerOnly>true</TriggerOnly>
+      </ProbeActionModuleType>
+
+    </ModuleTypes>
+  </TypeDefinitions>
+
+
+</ManagementPackFragment>

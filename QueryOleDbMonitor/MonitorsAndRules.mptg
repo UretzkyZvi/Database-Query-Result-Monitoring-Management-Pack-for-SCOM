@@ -1,0 +1,107 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance9ae4a65e476c486093707fb5b5d60c48" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>Library!OleDbQueryMonitorConsecutiveUnitMonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/IntervalSeconds$&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/SyncTime$&lt;/SyncTime&gt;&lt;ConnectionString&gt;Provider=SQLOLEDB;Data Source=$Target/Property[Type='Library!OleDBQueryMonitoring']/Instance$;Initial Catalog=$Target/Property[Type='Library!OleDBQueryMonitoring']/Database$;Integrated Security=SSPI&lt;/ConnectionString&gt;&lt;Query&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/Query$&lt;/Query&gt;&lt;StartDay&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/StartDay$&lt;/StartDay&gt;&lt;EndDay&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/EndDay$&lt;/EndDay&gt;&lt;DaysOfWeekMask&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/DaysOfWeekMask$&lt;/DaysOfWeekMask&gt;&lt;QueryName&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/QueryName$&lt;/QueryName&gt;&lt;Threshold&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/Threshold$&lt;/Threshold&gt;&lt;NumSamples&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/Samples$&lt;/NumSamples&gt;&lt;MetricType&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/MetricType$&lt;/MetricType&gt;&lt;Direction&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/Direction$&lt;/Direction&gt;&lt;ErrorMessage&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/ErrorMessage$&lt;/ErrorMessage&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>OK</OperationalStateId>
+            <OperationalStateDisplayName>OK</OperationalStateDisplayName>
+            <MonitorTypeStateId>OK</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>ERROR</OperationalStateId>
+            <OperationalStateDisplayName>ERROR</OperationalStateDisplayName>
+            <MonitorTypeStateId>ERROR</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <MonitorRunAs>Library!OleDBQueryMonitoringRunAsProfile</MonitorRunAs>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>OleDBQueryUnitMonitor</Id>
+        <DisplayName>Ole DB Query Unit Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>Library!OleDBQueryMonitoring</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Attention species execution results</AlertName>
+        <AlertDescription>Attention $Data/Context/DataItem/Property[@Name='ErrorMessage']$!
+The return value ($Data/Context/DataItem/Property[@Name='Value']$) in ($Data/Context/DataItem/Property[@Name='MetricType']$) is ($Data/Context/DataItem/Property[@Name='Direction']$) then ($Data/Context/DataItem/Property[@Name='Threshold']$).
+
+Details
+
+Query Name: $Data/Context/DataItem/Property[@Name='QueryName']$
+ConnectionString: $Data/Context/DataItem/Property[@Name='ConnectionString']$
+Query: $Data/Context/DataItem/Property[@Name='Query']$</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance1529e521030e4d8391b68f908f4c4df1" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomRule" Version="1.0.0.0">
+      <CustomRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>OleDbQueryPerformaceCollection</Id>
+        <DisplayName>OleDb Query Performace Collection</DisplayName>
+        <Description>Description for the new rule</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>Library!OleDBQueryMonitoring</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <DataSources>
+          <RuleDataSourceItem>
+            <DataSourceId>DS</DataSourceId>
+            <DataSourceConfig>&lt;IntervalSeconds&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/IntervalSeconds$&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/SyncTime$&lt;/SyncTime&gt;&lt;ConnectionString&gt;Provider=SQLOLEDB;Data Source=$Target/Property[Type='Library!OleDBQueryMonitoring']/Instance$;Initial Catalog=$Target/Property[Type='Library!OleDBQueryMonitoring']/Database$;Integrated Security=SSPI&lt;/ConnectionString&gt;&lt;Query&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/Query$&lt;/Query&gt;&lt;QueryName&gt;$Target/Property[Type='Library!OleDBQueryMonitoring']/QueryName$&lt;/QueryName&gt;</DataSourceConfig>
+            <DataSourceRunAs>Library!OleDBQueryMonitoringRunAsProfile</DataSourceRunAs>
+            <DataSourceType>Library!OleDbQueryMonitorPerformanceCollection</DataSourceType>
+          </RuleDataSourceItem>
+        </DataSources>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <WriteActions>
+          <RuleWriteActionItem>
+            <WriteActionId>WA</WriteActionId>
+            <WriteActionType>SC!Microsoft.SystemCenter.CollectPerformanceData</WriteActionType>
+          </RuleWriteActionItem>
+          <RuleWriteActionItem>
+            <WriteActionId>WADWH</WriteActionId>
+            <WriteActionType>DWH!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData</WriteActionType>
+          </RuleWriteActionItem>
+        </WriteActions>
+      </CustomRuleConfig>
+    </Instance>
+    <Instance ID="Instance6bf606b6fd10488da3eb74405ff8398b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.DependencyMonitor" Version="1.0.0.0">
+      <DependencyMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>
+          <Algorithm>WorstOf</Algorithm>
+        </Algorithm>
+        <MemberMonitor>Health!System.Health.EntityState</MemberMonitor>
+        <MemberInMaintenance>Ignore</MemberInMaintenance>
+        <MemberUnavailable>Ignore</MemberUnavailable>
+        <RelationshipType>Library!OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring</RelationshipType>
+        <ParentMonitor>Health!System.Health.EntityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>OleDBQueryMonitoringGroupDependencyMonitor</Id>
+        <DisplayName>OleDB Query Monitoring Group Dependency Monitor</DisplayName>
+        <Description />
+        <Target>Library!OleDBQueryMonitoringGroup</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </DependencyMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>
