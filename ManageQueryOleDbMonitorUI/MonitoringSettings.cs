@@ -47,7 +47,7 @@ namespace ManageQueryOleDbMonitorUI
             SharedUserData["MonitoringSettings.Threshold"] = (double)txtValue.Value;
             SharedUserData["MonitoringSettings.Samples"] = (int)txtSamples.Value;
             SharedUserData["MonitoringSettings.Direction"] = cmbDirection.SelectedValue.ToString();
-            SharedUserData["MonitoringSettings.ErrorMessage"] = !string.IsNullOrEmpty(txtErrorMessage.Text) ? txtErrorMessage.Text : "";
+            SharedUserData["MonitoringSettings.ErrorMessage"] = !string.IsNullOrEmpty(txtErrorMessage.Text) ? txtErrorMessage.Text : "No Description";
             SharedUserData["MonitoringSettings.GroupName"] = txtGroup.Text;
         }
 
