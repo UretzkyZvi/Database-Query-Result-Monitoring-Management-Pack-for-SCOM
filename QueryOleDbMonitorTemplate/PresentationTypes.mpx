@@ -1,0 +1,280 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PresentationTypes>
+    <UIPages>
+      <UIPage ID="OleDBQueryMonitoringUIPageInputParser" Accessibility="Internal">
+        <Implementation>
+          <Assembly>ManageQueryOleDbMonitorUI</Assembly>
+          <Type>ManageQueryOleDbMonitorUI.InputParser</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="OleDBQueryMonitoringUIPageConnectionAndQuery" Accessibility="Public">
+        <Implementation>
+          <Assembly>ManageQueryOleDbMonitorUI</Assembly>
+          <Type>ManageQueryOleDbMonitorUI.ConnectionAndQuery</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="OleDBQueryMonitoringUIPageMonitoringSettings" Accessibility="Public">
+        <Implementation>
+          <Assembly>ManageQueryOleDbMonitorUI</Assembly>
+          <Type>ManageQueryOleDbMonitorUI.MonitoringSettings</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="OleDBQueryMonitoringUIPageSchedulerSettings" Accessibility="Public">
+        <Implementation>
+          <Assembly>ManageQueryOleDbMonitorUI</Assembly>
+          <Type>ManageQueryOleDbMonitorUI.SchedulerSettings</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="OleDBQueryMonitoringUIPageSummary" Accessibility="Public">
+        <Implementation>
+          <Assembly>ManageQueryOleDbMonitorUI</Assembly>
+          <Type>ManageQueryOleDbMonitorUI.Summary</Type>
+        </Implementation>
+      </UIPage>
+    </UIPages>
+    <UIPageSets>
+      <UIPageSet ID="OleDBQueryMonitoringUIPageSet" TypeDefinitionID="OleDBQueryMonitoringTemplate" >
+        <UIPageReferences>
+          <UIPageReference ID="OleDBQueryMonitoringUIPageSet.NameAndDescription" PageID="System!System.NameAndDescriptionPage" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="Name">
+                    <xsl:value-of select="//Name" />
+                  </xsl:element>
+                  <xsl:element name="Description">
+                    <xsl:value-of select="//Description" />
+                  </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+          <UIPageReference ID="OleDBQueryMonitoringUIPageSet.ConnectionAndQuery" PageID="OleDBQueryMonitoringUIPageConnectionAndQuery" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="TemplateIdString">
+                    <xsl:value-of select="//TemplateIdString" />
+                  </xsl:element>
+                  <xsl:element name="Instance">
+                    <xsl:value-of select="//Instance" />
+                  </xsl:element>
+                  <xsl:element name="UniqueID">
+                    <xsl:value-of select="//UniqueID" />
+                  </xsl:element>     
+                  <xsl:element name="Database">
+                    <xsl:value-of select="//Database" />
+                  </xsl:element>
+                  <xsl:element name="Query">
+                    <xsl:value-of select="//Query" />
+                  </xsl:element>
+                  <xsl:element name="MetricType">
+                    <xsl:value-of select="//MetricType" />
+                  </xsl:element>
+                  <xsl:element name="PrincipalName">
+                    <xsl:value-of select="//PrincipalName" />
+                  </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+          <UIPageReference ID="OleDBQueryMonitoringUIPageSet.MonitoringSettings" PageID="OleDBQueryMonitoringUIPageMonitoringSettings" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="Direction">
+                    <xsl:value-of select="//Direction" />
+                  </xsl:element>
+                  <xsl:element name="Threshold">
+                    <xsl:value-of select="//Threshold" />
+                  </xsl:element>
+                  <xsl:element name="Samples">
+                    <xsl:value-of select="//Samples" />
+                  </xsl:element>
+                  <xsl:element name="ErrorMessage">
+                    <xsl:value-of select="//ErrorMessage" />
+                  </xsl:element>
+                  <xsl:element name="GroupName">
+                    <xsl:value-of select="//GroupName" />
+                  </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+          <UIPageReference ID="OleDBQueryMonitoringUIPageSet.SchedulerSettings" PageID="OleDBQueryMonitoringUIPageSchedulerSettings" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="IntervalSeconds">
+                    <xsl:value-of select="//IntervalSeconds" />
+                  </xsl:element>
+                  <xsl:element name="StartDay">
+                    <xsl:value-of select="//StartDay" />
+                  </xsl:element>
+                  <xsl:element name="EndDay">
+                    <xsl:value-of select="//EndDay" />
+                  </xsl:element>
+                  <xsl:element name="SyncTime">
+                    <xsl:value-of select="//SyncTime" />
+                  </xsl:element>
+                  <xsl:element name="DaysOfWeekMask">
+                    <xsl:value-of select="//DaysOfWeekMask" />
+                  </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+          <UIPageReference ID="OleDBQueryMonitoringUIPageSet.Summary" PageID="OleDBQueryMonitoringUIPageSummary" Usage="CreationOnly">
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+        </UIPageReferences>
+        <OutputTransform>
+          <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+            <xsl:template match="/">
+              <xsl:element name="Configuration">
+                <xsl:element name="Name">
+                  <xsl:value-of select="/Name" />
+                </xsl:element>
+                <xsl:element name="Description">
+                  <xsl:value-of select="/Description" />
+                </xsl:element>
+                <xsl:element name="TemplateIdString">
+                  <xsl:value-of select="/TemplateIdString" />
+                </xsl:element>
+                <xsl:element name="UniqueID">
+                  <xsl:value-of select="/UniqueID" />
+                </xsl:element>
+                <xsl:element name="Instance">
+                  <xsl:value-of select="/Instance" />
+                </xsl:element>
+                <xsl:element name="Database">
+                  <xsl:value-of select="/Database" />
+                </xsl:element>
+                <xsl:element name="QueryName">
+                  <xsl:value-of select="/Name" />
+                </xsl:element>
+                <xsl:element name="StartDay">
+                  <xsl:value-of select="/StartDay" />
+                </xsl:element>
+                <xsl:element name="EndDay">
+                  <xsl:value-of select="/EndDay" />
+                </xsl:element>
+                <xsl:element name="SyncTime">
+                  <xsl:value-of select="/SyncTime" />
+                </xsl:element>
+                <xsl:element name="IntervalSeconds">
+                  <xsl:value-of select="/IntervalSeconds" />
+                </xsl:element>
+                <xsl:element name="Query">
+                  <xsl:value-of select="/Query" />
+                </xsl:element>
+                <xsl:element name="DaysOfWeekMask">
+                  <xsl:value-of select="/DaysOfWeekMask" />
+                </xsl:element>
+                <xsl:element name="GroupName">
+                  <xsl:value-of select="/GroupName" />
+                </xsl:element>
+                <xsl:element name="Direction">
+                  <xsl:value-of select="/Direction" />
+                </xsl:element>
+                <xsl:element name="ErrorMessage">
+                  <xsl:value-of select="/ErrorMessage" />
+                </xsl:element>
+                <xsl:element name="MetricType">
+                  <xsl:value-of select="/MetricType" />
+                </xsl:element>
+                <xsl:element name="Samples">
+                  <xsl:value-of select="/Samples" />
+                </xsl:element>
+                <xsl:element name="Threshold">
+                  <xsl:value-of select="/Threshold" />
+                </xsl:element>
+                <xsl:element name="PrincipalName">
+                  <xsl:value-of select="/PrincipalName" />
+                </xsl:element>
+              </xsl:element>
+            </xsl:template>
+          </xsl:stylesheet>
+        </OutputTransform>
+      </UIPageSet>
+    </UIPageSets>
+  </PresentationTypes>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="OleDBQueryMonitoringTemplate">
+          <Name>OleDB Query Monitoring</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.NameAndDescription" SubElementID="SubTitle">
+          <Name>Name and Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.NameAndDescription" SubElementID="TabName">
+          <Name>General</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.NameAndDescription" SubElementID="Title">
+          <Name>General Properties</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.ConnectionAndQuery" SubElementID="SubTitle">
+          <Name>Connection And Query Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.ConnectionAndQuery" SubElementID="TabName">
+          <Name>Connection And Query Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.ConnectionAndQuery" SubElementID="Title">
+          <Name>Connection And Query Settings</Name>
+        </DisplayString>
+
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.MonitoringSettings" SubElementID="SubTitle">
+          <Name>Monitoring Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.MonitoringSettings" SubElementID="TabName">
+          <Name>Monitoring Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.MonitoringSettings" SubElementID="Title">
+          <Name>Monitoring Settings</Name>
+        </DisplayString>
+
+
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.SchedulerSettings" SubElementID="SubTitle">
+          <Name>Scheduler Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.SchedulerSettings" SubElementID="TabName">
+          <Name>Scheduler Settings</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.SchedulerSettings" SubElementID="Title">
+          <Name>Scheduler Settings</Name>
+        </DisplayString>
+        
+        
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.Summary" SubElementID="SubTitle">
+          <Name>Summary</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.Summary" SubElementID="TabName">
+          <Name>Summary</Name>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.Summary" SubElementID="Title">
+          <Name>Summary</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

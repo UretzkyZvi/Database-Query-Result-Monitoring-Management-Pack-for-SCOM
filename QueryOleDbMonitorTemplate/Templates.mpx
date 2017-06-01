@@ -1,0 +1,155 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Templates>
+    <Template ID="OleDBQueryMonitoringTemplate">
+      <Configuration>
+        <xsd:element name ="Name"             type="xsd:string"  />
+        <xsd:element name ="Description"      type="xsd:string"  />
+        <xsd:element name ="TemplateIdString" type="xsd:string"  />
+        <xsd:element name ="UniqueID"        type="xsd:string"  />
+        <xsd:element name ="Instance"        type="xsd:string"  />
+        <xsd:element name ="Database"        type="xsd:string"  />
+        <xsd:element name ="QueryName"       type="xsd:string"  />
+        <xsd:element name ="StartDay"        type="xsd:string"  />
+        <xsd:element name ="EndDay"          type="xsd:string"  />
+        <xsd:element name ="SyncTime"        type="xsd:string"  />
+        <xsd:element name ="IntervalSeconds" type="xsd:int"     />
+        <xsd:element name ="Query"           type="xsd:string"  />
+        <xsd:element name ="DaysOfWeekMask"  type="xsd:int"     />
+        <xsd:element name ="GroupName"       type="xsd:string"  />
+        <xsd:element name ="Direction"       type="xsd:string"  />
+        <xsd:element name ="ErrorMessage"    type="xsd:string"  />
+        <xsd:element name ="MetricType"      type="xsd:string"  />
+        <xsd:element name ="Samples"         type="xsd:int"     />
+        <xsd:element name ="Threshold"       type="xsd:double"  />
+        <xsd:element name ="PrincipalName"    type="xsd:string"  />
+      </Configuration>
+      <References>
+        <Reference ID="Self" />
+        <Reference ID="System" />
+        <Reference ID="Performance" />
+        <Reference ID="SC" />
+        <Reference ID="SCDW" />
+        <Reference ID="Health" />
+        <Reference ID="Windows" />
+        <Reference ID="Library"/>
+      </References>
+      <Implementation>
+        <Monitoring>
+          <Discoveries>
+            <Discovery ID="QueryOleDbMonitorInitialDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring"
+                       Target="$Reference/Windows$Microsoft.Windows.Computer" ConfirmDelivery="false" Remotable="false" Priority="Normal">
+              <Category>Discovery</Category>
+              <DiscoveryTypes>
+                <DiscoveryClass TypeID="$Reference/Library$OleDBQueryMonitoring" />
+                <DiscoveryRelationship TypeID="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" />
+              </DiscoveryTypes>
+              <DataSource ID="DS" TypeID="$Reference/Self$QueryOleDbMonitorInitialDiscoveryDataSource">
+                <IntervalSeconds>3600</IntervalSeconds>
+                <ClassId>$MPElement[Name="Library!OleDBQueryMonitoring"]$</ClassId>
+                <ClassInstanceSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/UniqueID$</Name>
+                      <Value>$TemplateConfig/UniqueID$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Instance$</Name>
+                      <Value>$TemplateConfig/Instance$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Database$</Name>
+                      <Value>$TemplateConfig/Database$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/QueryName$</Name>
+                      <Value>$TemplateConfig/QueryName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/StartDay$</Name>
+                      <Value>$TemplateConfig/StartDay$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/EndDay$</Name>
+                      <Value>$TemplateConfig/EndDay$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/SyncTime$</Name>
+                      <Value>$TemplateConfig/SyncTime$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/IntervalSeconds$</Name>
+                      <Value>$TemplateConfig/IntervalSeconds$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Query$</Name>
+                      <Value>$TemplateConfig/Query$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/DaysOfWeekMask$</Name>
+                      <Value>$TemplateConfig/DaysOfWeekMask$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/GroupName$</Name>
+                      <Value>$TemplateConfig/GroupName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Direction$</Name>
+                      <Value>$TemplateConfig/Direction$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/ErrorMessage$</Name>
+                      <Value>$TemplateConfig/ErrorMessage$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/MetricType$</Name>
+                      <Value>$TemplateConfig/MetricType$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Samples$</Name>
+                      <Value>$TemplateConfig/Samples$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Threshold$</Name>
+                      <Value>$TemplateConfig/Threshold$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Windows$Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                      <Value>$TemplateConfig/PrincipalName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
+                      <Value>$TemplateConfig/QueryName$</Value>
+                    </Setting>
+                  </Settings>
+                </ClassInstanceSettings>
+                <RelationshipId>$MPElement[Name="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring"]$</RelationshipId>
+                <SourceTypeId>$MPElement[Name="$Reference/Library$OleDBQueryMonitoringGroup"]$</SourceTypeId>
+                <SourceRoleSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoringGroup"]/Name$</Name>
+                      <Value>$TemplateConfig/GroupName$</Value>
+                    </Setting>
+                  </Settings>
+                </SourceRoleSettings>
+                <TargetTypeId>$MPElement[Name="Library!OleDBQueryMonitoring"]$</TargetTypeId>
+                <TargetRoleSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/UniqueID$</Name>
+                      <Value>$TemplateConfig/UniqueID$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Windows$Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                      <Value>$TemplateConfig/PrincipalName$</Value>
+                    </Setting>
+                  </Settings>
+                </TargetRoleSettings>
+              </DataSource>
+            </Discovery>
+          </Discoveries>
+        </Monitoring>
+      </Implementation>
+    </Template>
+  </Templates>
+</ManagementPackFragment>

@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ManageSCOMOleDbQueryMonitor
 {
+
     static class Program
     {
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SharedData data = new SharedData();
@@ -23,8 +28,8 @@ namespace ManageSCOMOleDbQueryMonitor
             {
                 try
                 {
-                   data.MGConnection =
-                         new Microsoft.EnterpriseManagement.ManagementGroup(ConfigurationManager.AppSettings["ConnectionServer"]);
+                    ////data.MGConnection = new Microsoft.EnterpriseManagement.ManagementGroup(ConfigurationManager.AppSettings["ConnectionServer"]);
+                    data.MGConnection = new Microsoft.EnterpriseManagement.ManagementGroup("mkappt016");
                 }
                 catch
                 {
@@ -37,7 +42,18 @@ namespace ManageSCOMOleDbQueryMonitor
                 Connection con = new Connection(data);
                 con.ShowDialog();
             }
-            Application.Run(new ManageOleDBQuery(data));
+            try
+            {
+                Application.Run(new ManageOleDBQuery(data));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
+
+       
     }
 }

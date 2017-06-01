@@ -36,16 +36,22 @@ namespace ManageSCOMOleDbQueryMonitor
         public SCOMSDKWrapper(SharedData data)
         {
             _Data = data;
-
-
         }
 
         public IObjectReader<EnterpriseManagementObject> GetEnterpriseManagementObjects(string className, string managementPackName)
         {
-            IList<ManagementPack> mps = _Data.MGConnection.ManagementPacks.GetManagementPacks(new ManagementPackCriteria(string.Format("Name = '{0}'", managementPackName)));
-            ManagementPackClass requestClass = _Data.MGConnection.EntityTypes.GetClass(className, mps[0]);
+            try
+            {
+                IList<ManagementPack> mps = _Data.MGConnection.ManagementPacks.GetManagementPacks(new ManagementPackCriteria(string.Format("Name = '{0}'", managementPackName)));
+                ManagementPackClass requestClass = _Data.MGConnection.EntityTypes.GetClass(className, mps[0]);
+                return _Data.MGConnection.EntityObjects.GetObjectReader<EnterpriseManagementObject>(requestClass, ObjectQueryOptions.Default);
+            }
+            catch
+            {
 
-            return _Data.MGConnection.EntityObjects.GetObjectReader<EnterpriseManagementObject>(requestClass, ObjectQueryOptions.Default);
+                throw new Exception(string.Format("Error Management Pack QueryOleDbMonitorLibrary not exist in {0} Management Group", _Data.MGConnection.Name));
+            }
+
         }
 
         public void DeleteInstanceWithGroup(Guid id, string groupName)

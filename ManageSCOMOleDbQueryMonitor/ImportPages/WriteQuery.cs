@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.IO;
+using Microsoft.EnterpriseManagement.Common;
+using Microsoft.EnterpriseManagement.Configuration;
 
 namespace ManageSCOMOleDbQueryMonitor
 {
@@ -107,13 +109,17 @@ namespace ManageSCOMOleDbQueryMonitor
         {
             // throw new NotImplementedException();
             txtConSql.Text = "Provider=SQLOLEDB;Data Source={0};Initial Catalog={1};Integrated Security=SSPI";
+
+            SCOMSDKWrapper s = new SCOMSDKWrapper(data);
+
+        
             txtConSql.Text = string.Format(txtConSql.Text, data.DBEngine.Path + "\\" + data.DBEngine.DisplayName, "{0}");
             QureyTamplate = txtConSql.Text;
             if (!string.IsNullOrEmpty(txtDatabase.Text))
             {
                 txtConSql.Text = string.Format(txtConSql.Text, txtDatabase.Text);
             }
-           
+
         }
 
         public void Save()

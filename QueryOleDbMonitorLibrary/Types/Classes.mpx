@@ -4,7 +4,7 @@
       
       <ClassTypes>
         <ClassType ID="OleDBQueryMonitoring" Base="Windows!Microsoft.Windows.LocalApplication" Abstract="false" Accessibility="Public" Singleton="false" Hosted="true">
-          <Property Type="guid"   ID ="UniqueID" Key="true"/>
+          <Property Type="string" ID ="UniqueID" Key="true"/>
           <Property Type="string" ID ="Instance" Key="false"/>
           <Property Type="string" ID ="Database" Key="false"/>
           <Property Type="string" ID ="QueryName" Key="false"/>
@@ -12,7 +12,7 @@
           <Property Type="string" ID ="EndDay" Key="false"/>
           <Property Type="string" ID ="SyncTime" Key="false"/>
           <Property Type="int"    ID ="IntervalSeconds" Key="false"/>
-          <Property Type="string" ID ="Query" Key="false" MaxLength="1024"/>
+          <Property Type="string" ID ="Query" Key="false"/>
           <Property Type="int"    ID ="DaysOfWeekMask" Key="false"/>
           <Property Type="string" ID ="GroupName" Key="false"/>
           <Property Type="string" ID ="Direction" Key="false"/>

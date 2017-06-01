@@ -86,6 +86,7 @@ namespace ManageSCOMOleDbQueryMonitor
                 reader = sdk.GetEnterpriseManagementObjects("Microsoft.SQLServer.DBEngine", "Microsoft.SQLServer.Library");
             }
 
+
             lbxDbEngine.ListBox.DataSource = new BindingSource(reader.OrderBy(x => x.Path), null);
             lbxDbEngine.ListBox.ValueMember = "Id";
             lbxDbEngine.ListBox.DisplayMember = "FullName";

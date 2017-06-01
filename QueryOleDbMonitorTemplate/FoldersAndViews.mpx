@@ -1,0 +1,176 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Presentation>
+    <Views>
+      <View Target="Library!OleDBQueryMonitoring" TypeID="SC!Microsoft.SystemCenter.StateViewType" Accessibility="Public" ID="OleDBQueryMonitoringTemplateViewState">
+        <Category>StateCollection</Category>
+        <Criteria/>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>OleDBQueryMonitoring</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="false" SortOrder="Ascending">
+            <Name>UniqueID</Name>
+            <Id>OleDBQueryMonitoring/UniqueID</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Instance</Name>
+            <Id>OleDBQueryMonitoring/Instance</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Database</Name>
+            <Id>OleDBQueryMonitoring/Database</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Query Name</Name>
+            <Id>OleDBQueryMonitoring/QueryName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Start Time</Name>
+            <Id>OleDBQueryMonitoring/StartDay</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>End Time</Name>
+            <Id>OleDBQueryMonitoring/EndDay</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Sync Time</Name>
+            <Id>OleDBQueryMonitoring/SyncTime</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Interval Seconds</Name>
+            <Id>OleDBQueryMonitoring/IntervalSeconds</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Query</Name>
+            <Id>OleDBQueryMonitoring/Query</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Days Of Week Mask</Name>
+            <Id>OleDBQueryMonitoring/DaysOfWeekMask</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Group Name</Name>
+            <Id>OleDBQueryMonitoring/GroupName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Direction</Name>
+            <Id>OleDBQueryMonitoring/Direction</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Error Message</Name>
+            <Id>OleDBQueryMonitoring/ErrorMessage</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>MetricType</Name>
+            <Id>OleDBQueryMonitoring/MetricType</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Samples</Name>
+            <Id>OleDBQueryMonitoring/Samples</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="true" SortOrder="Ascending">
+            <Name>Threshold</Name>
+            <Id>OleDBQueryMonitoring/Threshold</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+
+      <View ID="QueryOleDbMonitorAlertView"
+      Accessibility="Internal"
+      Enabled="true"
+      Target="Library!OleDBQueryMonitoring"
+      TypeID="SC!Microsoft.SystemCenter.AlertViewType"
+      Visible="true">
+        <Category>Custom</Category>
+        <Criteria>
+          <ResolutionState>
+            <StateRange Operator="NotEquals">255</StateRange>
+          </ResolutionState>
+        </Criteria>
+      </View>
+      
+      <View ID="QueryOleDbMonitorPerfView"
+            Accessibility="Internal"
+            Enabled="true"
+            Target="Library!OleDBQueryMonitoring"
+            TypeID="SC!Microsoft.SystemCenter.PerformanceViewType"
+            Visible="true">
+        <Category>Custom</Category>
+        <Criteria />
+      </View>
+
+      <View ID="QueryOleDbMonitorGroupStateView"
+           Accessibility="Internal"
+           Enabled="true"
+           Target="Library!OleDBQueryMonitoringGroup"
+           TypeID="SC!Microsoft.SystemCenter.StateViewType"
+           Visible="true">
+        <Category>Custom</Category>
+        <Criteria />
+      </View>
+      
+    </Views>
+    <Folders>
+      <Folder ID="OleDBQueryMonitoringTemplateFolderRoot" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+      <Folder ID="OleDBQueryMonitoringTemplateFolder" Accessibility="Public" ParentFolder="OM!Microsoft.SystemCenter.OperationsManager.Authoring.TemplateParsers.Root"/>
+    </Folders>
+    <FolderItems>
+      <FolderItem ID="OleDBQueryMonitoringTemplateViewStateFolderItem" ElementID="OleDBQueryMonitoringTemplateViewState" Folder="OleDBQueryMonitoringTemplateFolderRoot" />
+      <FolderItem ID="OleDBQueryMonitoringTemplateFolderItem" ElementID="OleDBQueryMonitoringTemplate" Folder="OleDBQueryMonitoringTemplateFolder" />
+      <FolderItem ID="OleDBQueryMonitoringTemplateFolderItemInputParser" ElementID="OleDBQueryMonitoringUIPageInputParser" Folder="OleDBQueryMonitoringTemplateFolder" />
+
+      <FolderItem ElementID="QueryOleDbMonitorAlertView"
+               ID="QueryOleDbMonitorAlertViewItemFolderItem"
+               Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
+
+      <FolderItem ElementID="QueryOleDbMonitorPerfView"
+                  ID="QueryOleDbMonitorPerfViewItemFolderItem"
+                  Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
+
+
+      <FolderItem ElementID="QueryOleDbMonitorGroupStateView"
+                  ID="QueryOleDbMonitorGroupStateViewItemFolderItem"
+                  Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
+      
+    </FolderItems>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="OleDBQueryMonitoringTemplateFolderRoot">
+          <Name>Query Monitor</Name>
+          <Description>Monitor Application By Qurey Folder</Description>
+        </DisplayString>
+        <DisplayString ElementID="OleDBQueryMonitoringTemplateViewState">
+          <Name>State</Name>
+        </DisplayString>
+        <DisplayString ElementID="QueryOleDbMonitorAlertView">
+          <Name>Alert</Name>
+        </DisplayString>
+        <DisplayString ElementID="QueryOleDbMonitorPerfView">
+          <Name>Performance</Name>
+        </DisplayString>
+        <DisplayString ElementID="QueryOleDbMonitorGroupStateView">
+          <Name>Group State</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

@@ -49,20 +49,6 @@ namespace ManageSCOMOleDbQueryMonitor
             {
                 days.Add(((DaysMask)item).ToString(), item);
             }
-           
-            //Array a = Enum.GetValues(typeof(DaysMask));
-            //DaysMask aa = (DaysMask)Enum.Parse(typeof(DaysMask), arr[0]);
-
-            //SortedDictionary<string, int> days = new SortedDictionary<string, int>
-            //{
-            //    {"Sunday", 1},
-            //    {"Monday", 2},
-            //    {"Tuesday", 4},
-            //    {"Wednesday", 8},
-            //    {"Thursday", 16},
-            //    {"Friday", 32},
-            //    {"Saturday",64 }
-            //};
             return days;
 
         }

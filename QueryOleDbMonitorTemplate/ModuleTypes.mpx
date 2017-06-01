@@ -1,0 +1,55 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType Accessibility="Public" ID="QueryOleDbMonitorInitialDiscoveryDataSource" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.Discovery.MapperSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" maxOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ClassId" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ClassInstanceSettings" type="SettingsType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="RelationshipId" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="RelationshipInstanceSettings" type="SettingsType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="SourceTypeId" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SourceRoleSettings" type="SettingsType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="TargetTypeId" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="TargetRoleSettings" type="SettingsType" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="System!System.Discovery.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval Unit="Seconds">$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ConditionDetection ID="CD" TypeID="System!System.Discovery.ClassAndRelationshipSnapshotDataMapper">
+                <ClassId>$Config/ClassId$</ClassId>
+                <ClassInstanceSettings>$Config/ClassInstanceSettings$</ClassInstanceSettings>
+                <RelationshipId>$Config/RelationshipId$</RelationshipId>
+                <RelationshipInstanceSettings>$Config/RelationshipInstanceSettings$</RelationshipInstanceSettings>
+                <SourceTypeId>$Config/SourceTypeId$</SourceTypeId>
+                <SourceRoleSettings>$Config/SourceRoleSettings$</SourceRoleSettings>
+                <TargetTypeId>$Config/TargetTypeId$</TargetTypeId>
+                <TargetRoleSettings>$Config/TargetRoleSettings$</TargetRoleSettings>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="CD">
+                <Node ID="DS" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+</ManagementPackFragment>

@@ -1,0 +1,11 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Categories>
+    <Category ID="ManageQueryOleDbMonitorUI.Category.UI"
+              Target="ManageQueryOleDbMonitorUI"
+              Value="Visualization!Microsoft.SystemCenter.Visualization.WindowsAssembly" />
+  </Categories>
+  <Resources>
+    <Assembly ID="ManageQueryOleDbMonitorUI" Accessibility="Public" FileName="ManageQueryOleDbMonitorUI.dll" HasNullStream="false" QualifiedName="ManageQueryOleDbMonitorUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"></Assembly>
+  </Resources>
+ 
+</ManagementPackFragment>
