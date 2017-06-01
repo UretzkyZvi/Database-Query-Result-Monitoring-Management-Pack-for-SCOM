@@ -51,7 +51,21 @@ namespace ManageQueryOleDbMonitorUI
 
                             using (ManageQueryOleDBSDKHelper helper = new ManageQueryOleDBSDKHelper(ManagementGroup))
                             {
-                                Databases = helper.GetRelatedObjects(item.Id, "Microsoft.SQLServer.Library", "Microsoft.SQLServer.Database");
+                                switch (item.FullName.ToString().Split(':')[0])
+                                {
+                                    case "Microsoft.SQLServer.DBEngine":
+                                        Databases = helper.GetRelatedObjects(item.Id, "Microsoft.SQLServer.Library", "Microsoft.SQLServer.Database");
+                                        break;
+                                    case "Microsoft.SQLServer.2014.DBEngine":
+                                        Databases = helper.GetRelatedObjects(item.Id, "Microsoft.SQLServer.2014.Discovery", "Microsoft.SQLServer.2014.Database");
+                                        break;
+                                    case "Microsoft.SQLServer.2016.DBEngine":
+                                        Databases = helper.GetRelatedObjects(item.Id, "Microsoft.SQLServer.2016.Discovery", "Microsoft.SQLServer.2016.Database");
+                                        break;
+                                    default:
+                                        break;
+                                }
+
                                 cmbDatabase.DataSource = new BindingSource(Databases, null);
                                 cmbDatabase.DisplayMember = "DisplayName";
                                 cmbDatabase.ValueMember = "Id";

@@ -66,7 +66,9 @@ namespace ManageQueryOleDbMonitorUI
             }
             return new ReadOnlyCollection<IChooserControlItem>(list);
         }
-        ManagementPackClass monitoringClass;
+        ManagementPackClass monitoringClassDBEngine;
+        ManagementPackClass monitoringClassDBEngine14;
+        ManagementPackClass monitoringClassDBEngine16;
         private void PopulateDBEngines()
         {
             IManagementGroupSession managementGroupSession = null;
@@ -82,20 +84,56 @@ namespace ManageQueryOleDbMonitorUI
 
             using (ManageQueryOleDBSDKHelper helper = new ManageQueryOleDBSDKHelper(managementGroupSession.ManagementGroup))
             {
-                monitoringClass = helper.GetManagementPackClass( "Microsoft.SQLServer.Library", "Microsoft.SQLServer.DBEngine");
-                if (DBEngineImage == null)
-                {
-                    DBEngineImage = ComponentMethodLibrary.GetImageFromSharedCache(monitoringClass, base.ParentForm);
-                }
                 List<EnterpriseManagementObject> list = new List<EnterpriseManagementObject>();
-                IObjectReader<EnterpriseManagementObject> allDBEngines=  helper.GetEnterpriseManagementObjects(monitoringClass);
-                if (allDBEngines!=null)
+                monitoringClassDBEngine = helper.GetManagementPackClass("Microsoft.SQLServer.Library", "Microsoft.SQLServer.DBEngine");
+                IObjectReader<EnterpriseManagementObject> allDBEngines = helper.GetEnterpriseManagementObjects(monitoringClassDBEngine);
+
+                if (allDBEngines != null)
                 {
                     foreach (EnterpriseManagementObject current in allDBEngines)
                     {
-                         list.Add(current);
+                        list.Add(current);
                     }
                 }
+                try
+                {
+                    monitoringClassDBEngine14 = helper.GetManagementPackClass("Microsoft.SQLServer.2014.Discovery", "Microsoft.SQLServer.2014.DBEngine");
+                    IObjectReader<EnterpriseManagementObject> allDBEngines14 = helper.GetEnterpriseManagementObjects(monitoringClassDBEngine14);
+                    if (allDBEngines14 != null)
+                    {
+                        foreach (EnterpriseManagementObject current in allDBEngines14)
+                        {
+                            list.Add(current);
+                        }
+                    }
+                }
+                catch
+                {
+                    //you dont have sql 2014 mp
+                }
+                try
+                {
+                    monitoringClassDBEngine16 = helper.GetManagementPackClass("Microsoft.SQLServer.2016.Discovery", "Microsoft.SQLServer.2016.DBEngine");
+                    IObjectReader<EnterpriseManagementObject> allDBEngines16 = helper.GetEnterpriseManagementObjects(monitoringClassDBEngine16);
+                    if (allDBEngines16 != null)
+                    {
+                        foreach (EnterpriseManagementObject current in allDBEngines16)
+                        {
+                            list.Add(current);
+                        }
+                    }
+                }
+                catch
+                {
+                    //you dont have sql 2016 mp
+                }
+
+                if (DBEngineImage == null)
+                {
+                    DBEngineImage = ComponentMethodLibrary.GetImageFromSharedCache(monitoringClassDBEngine, base.ParentForm);
+                }
+
+
                 DBEngines = list;
             }
 

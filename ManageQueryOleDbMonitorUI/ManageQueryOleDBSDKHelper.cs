@@ -83,12 +83,12 @@ namespace ManageQueryOleDbMonitorUI
             {
                 throw new Exception(string.Format("Error Management Pack {1} not exist in {0} Management Group", managementGroup.Name, managementPackName));
             }
-            ManagementPackClass requestClass = managementGroup.EntityTypes.GetClass(className, mps[0]);
-            if (requestClass == null)
+            if (mps.Count>=1)
             {
-                throw new Exception(string.Format("Error Class {0} not exist in {1} Management Pack", className, managementPackName));
+                ManagementPackClass requestClass = managementGroup.EntityTypes.GetClass(className, mps[0]);
+                return requestClass;
             }
-            return requestClass;
+            throw new Exception(string.Format("Error Class {0} not exist in {1} Management Pack", className, managementPackName));
         }
 
         internal IList<EnterpriseManagementObject> GetRelatedObjects(Guid objectID, string managementPackName, string className)
