@@ -1,5 +1,5 @@
-# Query OleDB monitor
-A Management Pack created by Uretzky Zvi for monitoring application by SQL queries with System Center Operations Manager.
+# OleDB query monitor
+A Management Pack created by Uretzky Zvi for easily create monitors based SQL queries using System Center Operations Manager.
 
 If you use this and you like it, invite me to a coffee :-)
 
