@@ -42,5 +42,5 @@ Please always test new management packs in a test environment before importing t
 ![wizard step 7](/Images/2017-06-09%2011_29_52-Add%20Monitoring%20Wizard.png?raw=true)
 ![wizard step 8](/Images/2017-06-09%2011_30_04-Add%20Monitoring%20Wizard.png?raw=true)
 ![wizard step 9](/Images/2017-06-09%2011_31_08-OleDB%20Query%20Monitoring%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
-![wizard step 10](/Images/2017-06-09%2011_32_40-Active%20Alerts%20-%20analyticOps%20-%20Operations%20Manager.pngg?raw=true)
+![wizard step 10](/Images/2017-06-09%2011_32_40-Active%20Alerts%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
 
