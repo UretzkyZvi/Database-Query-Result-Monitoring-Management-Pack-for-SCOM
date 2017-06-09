@@ -26,8 +26,10 @@ Please always test new management packs in a test environment before importing t
 * Microsoft SQL Management Packs.
 * SCOM Admin rights (only Administrators can import management packs)
 ## Quick Start - Install
-1. Download QueryOleDbMonitorSetup.msi
+1. Download [QueryOleDbMonitorSetup.msi](https://github.com/UretzkyZvi/Monitor-Applications-Using-SQL-Queries/releases/download/v1.0.0.0/QueryOleDbMonitorSetup.msi)
 2. Run As Administrator the MSI file.
 3. Import the management packs into SCOM. All the MPs are in C:\Program Files (x86)\QueryOleDbMonitoring\ManagmentPasks 
+(https://github.com/UretzkyZvi/Monitor-Applications-Using-SQL-Queries/blob/master/Images/2017-06-09%2011_22_32-ManagmentPasks.png)
+
 4. Open Authoring find "OleDB Query Monitoring", click Add Monitoring Wizard
 5. Follow the wizard instruction and Enjoy!
