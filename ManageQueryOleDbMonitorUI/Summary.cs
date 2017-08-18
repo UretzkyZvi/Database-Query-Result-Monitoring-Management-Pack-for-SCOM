@@ -120,6 +120,7 @@ namespace ManageQueryOleDbMonitorUI
             AddSummaryItem("Instance", Instance.ToUpper());
             AddSummaryItem("Database", Database);
             AddSummaryItem("Query", Query);
+            AddSummaryItem("Error Message", ErrorMessage);
 
             summaryListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             summaryListView.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);

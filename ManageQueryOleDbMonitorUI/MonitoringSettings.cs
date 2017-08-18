@@ -47,7 +47,14 @@ namespace ManageQueryOleDbMonitorUI
             SharedUserData["MonitoringSettings.Threshold"] = (double)txtValue.Value;
             SharedUserData["MonitoringSettings.Samples"] = (int)txtSamples.Value;
             SharedUserData["MonitoringSettings.Direction"] = cmbDirection.SelectedValue.ToString();
-            SharedUserData["MonitoringSettings.ErrorMessage"] = !string.IsNullOrEmpty(txtErrorMessage.Text) ? txtErrorMessage.Text : "No Description";
+            if (!string.IsNullOrEmpty(txtErrorMessage.Text))
+            {
+                SharedUserData["MonitoringSettings.ErrorMessage"] = txtErrorMessage.Text;
+            }
+            else
+            {
+                SharedUserData["MonitoringSettings.ErrorMessage"] = "No Description";
+            }
             SharedUserData["MonitoringSettings.GroupName"] = txtGroup.Text;
         }
 
@@ -134,7 +141,15 @@ namespace ManageQueryOleDbMonitorUI
             config.Threshold = (double)txtValue.Value;
             config.Direction = cmbDirection.SelectedValue.ToString();
             config.Samples = (int)txtSamples.Value;
-            config.ErrorMessage = txtErrorMessage.Text;
+            if (!string.IsNullOrEmpty(txtErrorMessage.Text))
+            {
+                config.ErrorMessage = txtErrorMessage.Text;
+            }
+            else
+            {
+                config.ErrorMessage = "No Description";
+            }
+           
             config.GroupName = txtGroup.Text;
 
             OutputConfigurationXml = XmlHelper.Serialize(config, true);
