@@ -46,9 +46,14 @@ namespace ManageQueryOleDbMonitorUI
                         EnterpriseManagementObject item = selectedItem.Item as EnterpriseManagementObject;
                         if (!string.IsNullOrEmpty(item.FullName))
                         {
-                            txtInstanceName.Text = item.Path + "\\" + item.DisplayName;
-
-
+                            if (item.DisplayName.ToLower()== "SQLEXPRESS".ToLower() || item.DisplayName.ToLower() == "MSSQLSERVER")
+                            {
+                                txtInstanceName.Text = item.Path;
+                            }
+                            else
+                            {
+                                txtInstanceName.Text = item.Path + "\\" + item.DisplayName;
+                            }
                             using (ManageQueryOleDBSDKHelper helper = new ManageQueryOleDBSDKHelper(ManagementGroup))
                             {
                                 switch (item.FullName.ToString().Split(':')[0])
@@ -97,6 +102,7 @@ namespace ManageQueryOleDbMonitorUI
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            this.ValidatePageConfiguration();
             using (OleDbConnection con = new OleDbConnection(string.Format("Provider=SQLOLEDB;Data Source={0};Initial Catalog={1};Integrated Security=SSPI", txtInstanceName.Text, Database)))
             {
                 using (OleDbCommand cmd = new OleDbCommand(txtQuery.Text, con))
@@ -118,12 +124,14 @@ namespace ManageQueryOleDbMonitorUI
                             else
                             {
                                 MessageBox.Show("return not numeric value rewrite query, result value " + dt.Rows[0][0].ToString());
+                                IsConfigValid = false;
                                 return;
                             }
                         }
                         else
                         {
                             MessageBox.Show("return more then one row or column");
+                            IsConfigValid = false;
                             return;
                         }
                     }
@@ -131,6 +139,7 @@ namespace ManageQueryOleDbMonitorUI
                     {
 
                         MessageBox.Show("Error: " + EX.Message);
+                        IsConfigValid = false;
                         return;
                     }
 
@@ -146,7 +155,7 @@ namespace ManageQueryOleDbMonitorUI
             this.errorProvider.Clear();
             if (string.IsNullOrEmpty(txtInstanceName.Text))
             {
-                this.errorProvider.SetError(btnBrowse, string.Format(CultureInfo.CurrentUICulture, "BD Engine must be selected", new object[0]));
+                this.errorProvider.SetError(txtInstanceName, string.Format(CultureInfo.CurrentUICulture, "BD Engine must be selected", new object[0]));
 
                 return false;
             }
