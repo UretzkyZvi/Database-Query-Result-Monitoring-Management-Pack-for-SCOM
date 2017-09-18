@@ -7,5 +7,4 @@
   <Resources>
     <Assembly ID="ManageQueryOleDbMonitorUI" Accessibility="Public" FileName="ManageQueryOleDbMonitorUI.dll" HasNullStream="false" QualifiedName="ManageQueryOleDbMonitorUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"></Assembly>
   </Resources>
- 
 </ManagementPackFragment>

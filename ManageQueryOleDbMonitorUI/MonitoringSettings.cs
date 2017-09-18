@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.EnterpriseManagement.UI;
+﻿using Microsoft.EnterpriseManagement.Common;
 using Microsoft.EnterpriseManagement.Mom.Internal.UI.Common;
-using Microsoft.EnterpriseManagement.Common;
-using Microsoft.EnterpriseManagement.Configuration;
-using System.Data.OleDb;
-using System.Globalization;
 using Microsoft.EnterpriseManagement.Mom.Internal.UI.Controls;
+using Microsoft.EnterpriseManagement.UI;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace ManageQueryOleDbMonitorUI
 {
     public partial class MonitoringSettings : UIPage
     {
-
         #region Constructor
+
         public MonitoringSettings()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Private Methods
 
@@ -39,7 +32,6 @@ namespace ManageQueryOleDbMonitorUI
               {"less then or equals","lessequal" }
             };
             return Direction;
-
         }
 
         private void SetSharedUserData()
@@ -53,7 +45,7 @@ namespace ManageQueryOleDbMonitorUI
             }
             else
             {
-                SharedUserData["MonitoringSettings.ErrorMessage"] = "No Description";
+                SharedUserData["MonitoringSettings.ErrorMessage"] = "No additional description";
             }
             SharedUserData["MonitoringSettings.GroupName"] = txtGroup.Text;
         }
@@ -73,21 +65,11 @@ namespace ManageQueryOleDbMonitorUI
             }
             return true;
         }
-        #endregion
+
+        #endregion Private Methods
 
         #region Public Methods
 
-        public override bool OnSetActive()
-        {
-            if (cmbDirection.DataSource == null)
-            {
-                cmbDirection.DataSource = new BindingSource(PopulateDirection(), null);
-                cmbDirection.DisplayMember = "Key";
-                cmbDirection.ValueMember = "Value";
-            }
-
-            return base.OnSetActive();
-        }
         public override void LoadPageConfig()
         {
             if (!IsCreationMode)
@@ -112,7 +94,6 @@ namespace ManageQueryOleDbMonitorUI
                     txtGroup.Text = config.GroupName;
 
                     SetSharedUserData();
-
                 }
                 catch (ArgumentNullException exception)
                 {
@@ -122,13 +103,22 @@ namespace ManageQueryOleDbMonitorUI
                 {
                     return;
                 }
-
             }
             IsConfigValid = ValidatePageConfiguration();
             base.LoadPageConfig();
         }
 
+        public override bool OnSetActive()
+        {
+            if (cmbDirection.DataSource == null)
+            {
+                cmbDirection.DataSource = new BindingSource(PopulateDirection(), null);
+                cmbDirection.DisplayMember = "Key";
+                cmbDirection.ValueMember = "Value";
+            }
 
+            return base.OnSetActive();
+        }
 
         public override bool SavePageConfig()
         {
@@ -147,9 +137,8 @@ namespace ManageQueryOleDbMonitorUI
             }
             else
             {
-                config.ErrorMessage = "No Description";
+                config.ErrorMessage = "No additional description";
             }
-           
             config.GroupName = txtGroup.Text;
 
             OutputConfigurationXml = XmlHelper.Serialize(config, true);
@@ -157,21 +146,9 @@ namespace ManageQueryOleDbMonitorUI
             return true;
         }
 
-
-        #endregion
+        #endregion Public Methods
 
         #region Events
-        private void rbtnExistGroup_CheckedChanged(object sender, EventArgs e)
-        {
-            txtGroup.Enabled = false;
-            btnBrowse.Enabled = true;
-        }
-
-        private void rbtnNewGroup_CheckedChanged(object sender, EventArgs e)
-        {
-            txtGroup.Enabled = true;
-            btnBrowse.Enabled = false;
-        }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
@@ -196,13 +173,25 @@ namespace ManageQueryOleDbMonitorUI
                     }
                 }
             }
-
         }
-        #endregion
+
+        private void rbtnExistGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            txtGroup.Enabled = false;
+            btnBrowse.Enabled = true;
+        }
+
+        private void rbtnNewGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            txtGroup.Enabled = true;
+            btnBrowse.Enabled = false;
+        }
 
         private void txtGroup_TextChanged(object sender, EventArgs e)
         {
             IsConfigValid = ValidatePageConfiguration();
         }
+
+        #endregion Events
     }
 }

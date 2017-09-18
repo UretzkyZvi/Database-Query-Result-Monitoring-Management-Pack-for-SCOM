@@ -66,7 +66,7 @@
                   </xsl:element>
                   <xsl:element name="UniqueID">
                     <xsl:value-of select="//UniqueID" />
-                  </xsl:element>     
+                  </xsl:element>
                   <xsl:element name="Database">
                     <xsl:value-of select="//Database" />
                   </xsl:element>
@@ -79,6 +79,14 @@
                   <xsl:element name="PrincipalName">
                     <xsl:value-of select="//PrincipalName" />
                   </xsl:element>
+                  <xsl:element name="ConnectionString">
+                    <xsl:value-of select="//ConnectionString" />
+                  </xsl:element>
+                  <xsl:if test="count(//RunAsAccount) &gt; 0">
+                    <xsl:element name="RunAsAccount">
+                      <xsl:value-of select="//RunAsAccount" />
+                    </xsl:element>
+                  </xsl:if>
                 </xsl:template>
               </xsl:stylesheet>
             </InputTransform>
@@ -100,9 +108,11 @@
                   <xsl:element name="Samples">
                     <xsl:value-of select="//Samples" />
                   </xsl:element>
-                  <xsl:element name="ErrorMessage">
-                    <xsl:value-of select="//ErrorMessage" />
-                  </xsl:element>
+                  <xsl:if test="count(//ErrorMessage) &gt; 0">
+                    <xsl:element name="ErrorMessage">
+                      <xsl:value-of select="//ErrorMessage" />
+                    </xsl:element>
+                  </xsl:if>
                   <xsl:element name="GroupName">
                     <xsl:value-of select="//GroupName" />
                   </xsl:element>
@@ -208,8 +218,14 @@
                 <xsl:element name="Threshold">
                   <xsl:value-of select="/Threshold" />
                 </xsl:element>
+                <xsl:element name="ConnectionString">
+                  <xsl:value-of select="/ConnectionString" />
+                </xsl:element>
                 <xsl:element name="PrincipalName">
                   <xsl:value-of select="/PrincipalName" />
+                </xsl:element>
+                <xsl:element name="RunAsAccount">
+                  <xsl:value-of select="/RunAsAccount" />
                 </xsl:element>
               </xsl:element>
             </xsl:template>
@@ -263,8 +279,8 @@
         <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.SchedulerSettings" SubElementID="Title">
           <Name>Scheduler Settings</Name>
         </DisplayString>
-        
-        
+
+
         <DisplayString ElementID="OleDBQueryMonitoringUIPageSet.Summary" SubElementID="SubTitle">
           <Name>Summary</Name>
         </DisplayString>

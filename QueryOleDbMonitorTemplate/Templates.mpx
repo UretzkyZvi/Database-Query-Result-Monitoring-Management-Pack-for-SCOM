@@ -2,26 +2,28 @@
   <Templates>
     <Template ID="OleDBQueryMonitoringTemplate">
       <Configuration>
-        <xsd:element name ="Name"             type="xsd:string"  />
-        <xsd:element name ="Description"      type="xsd:string"  />
-        <xsd:element name ="TemplateIdString" type="xsd:string"  />
-        <xsd:element name ="UniqueID"        type="xsd:string"  />
-        <xsd:element name ="Instance"        type="xsd:string"  />
-        <xsd:element name ="Database"        type="xsd:string"  />
-        <xsd:element name ="QueryName"       type="xsd:string"  />
-        <xsd:element name ="StartDay"        type="xsd:string"  />
-        <xsd:element name ="EndDay"          type="xsd:string"  />
-        <xsd:element name ="SyncTime"        type="xsd:string"  />
-        <xsd:element name ="IntervalSeconds" type="xsd:int"     />
-        <xsd:element name ="Query"           type="xsd:string"  />
-        <xsd:element name ="DaysOfWeekMask"  type="xsd:int"     />
-        <xsd:element name ="GroupName"       type="xsd:string"  />
-        <xsd:element name ="Direction"       type="xsd:string"  />
-        <xsd:element name ="ErrorMessage"    type="xsd:string"  />
-        <xsd:element name ="MetricType"      type="xsd:string"  />
-        <xsd:element name ="Samples"         type="xsd:int"     />
-        <xsd:element name ="Threshold"       type="xsd:double"  />
-        <xsd:element name ="PrincipalName"    type="xsd:string"  />
+        <xsd:element name ="Name"             type="xsd:string" />
+        <xsd:element name ="Description"      type="xsd:string" />
+        <xsd:element name ="TemplateIdString" type="xsd:string" />
+        <xsd:element name ="UniqueID"        type="xsd:string" />
+        <xsd:element name ="Instance"        type="xsd:string" />
+        <xsd:element name ="Database"        type="xsd:string" />
+        <xsd:element name ="QueryName"       type="xsd:string" />
+        <xsd:element name ="StartDay"        type="xsd:string" />
+        <xsd:element name ="EndDay"          type="xsd:string" />
+        <xsd:element name ="SyncTime"        type="xsd:string" />
+        <xsd:element name ="IntervalSeconds" type="xsd:int" />
+        <xsd:element name ="Query"           type="xsd:string" />
+        <xsd:element name ="DaysOfWeekMask"  type="xsd:int" />
+        <xsd:element name ="GroupName"       type="xsd:string" />
+        <xsd:element name ="Direction"       type="xsd:string" />
+        <xsd:element name ="ErrorMessage"    type="xsd:string" />
+        <xsd:element name ="MetricType"      type="xsd:string" />
+        <xsd:element name ="Samples"         type="xsd:int" />
+        <xsd:element name ="Threshold"       type="xsd:double" />
+        <xsd:element name ="ConnectionString"    type="xsd:string" />
+        <xsd:element name ="PrincipalName"    type="xsd:string" />
+        <xsd:element name ="RunAsAccount"    type="xsd:string" />
       </Configuration>
       <References>
         <Reference ID="Self" />
@@ -31,9 +33,26 @@
         <Reference ID="SCDW" />
         <Reference ID="Health" />
         <Reference ID="Windows" />
-        <Reference ID="Library"/>
+        <Reference ID="Library" />
       </References>
       <Implementation>
+        <TypeDefinitions>
+          <EntityTypes>
+            <ClassTypes>
+              <ClassType ID="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"
+                         Accessibility="Internal"
+                         Abstract="false"
+                         Base="$Reference/Library$OleDBQueryMonitoring"
+                         Hosted="true"
+                         Singleton="false" />
+            </ClassTypes>
+          </EntityTypes>
+          <SecureReferences>
+            <SecureReference ID="OleDb.$TemplateConfig/TemplateIdString$.SimpleAuthenticationAccount"
+                             Accessibility="Public"
+                             Context="$Reference/System$System.Entity" />
+          </SecureReferences>
+        </TypeDefinitions>
         <Monitoring>
           <Discoveries>
             <Discovery ID="QueryOleDbMonitorInitialDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring"
@@ -41,11 +60,12 @@
               <Category>Discovery</Category>
               <DiscoveryTypes>
                 <DiscoveryClass TypeID="$Reference/Library$OleDBQueryMonitoring" />
+                <DiscoveryClass TypeID="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$" />
                 <DiscoveryRelationship TypeID="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" />
               </DiscoveryTypes>
               <DataSource ID="DS" TypeID="$Reference/Self$QueryOleDbMonitorInitialDiscoveryDataSource">
                 <IntervalSeconds>3600</IntervalSeconds>
-                <ClassId>$MPElement[Name="Library!OleDBQueryMonitoring"]$</ClassId>
+                <ClassId>$MPElement[Name="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"]$</ClassId>
                 <ClassInstanceSettings>
                   <Settings>
                     <Setting>
@@ -118,7 +138,7 @@
                     </Setting>
                     <Setting>
                       <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
-                      <Value>$TemplateConfig/QueryName$</Value>
+                      <Value>$TemplateConfig/Name$</Value>
                     </Setting>
                   </Settings>
                 </ClassInstanceSettings>
@@ -132,7 +152,7 @@
                     </Setting>
                   </Settings>
                 </SourceRoleSettings>
-                <TargetTypeId>$MPElement[Name="Library!OleDBQueryMonitoring"]$</TargetTypeId>
+                <TargetTypeId>$MPElement[Name="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"]$</TargetTypeId>
                 <TargetRoleSettings>
                   <Settings>
                     <Setting>
@@ -148,7 +168,146 @@
               </DataSource>
             </Discovery>
           </Discoveries>
+          <Rules>
+            <Rule ID="QueryOleDbMonitor.OleDbQueryPerformaceCollection.$TemplateConfig/TemplateIdString$" 
+                  Target="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$" 
+                  Enabled="true" 
+                  ConfirmDelivery="false" 
+                  Remotable="true" 
+                  Priority="Normal" 
+                  DiscardLevel="100">
+              <Category>PerformanceCollection</Category>
+              <DataSources>
+                <DataSource ID="DS" 
+                            TypeID="$Reference/Library$OleDbQueryMonitorPerformanceCollection"
+                            RunAs="$Reference/Library$OleDBQueryMonitoring.PrivilegedMonitoringAccount">
+                  <IntervalSeconds>$TemplateConfig/IntervalSeconds$</IntervalSeconds>
+                  <SyncTime>$TemplateConfig/SyncTime$</SyncTime>
+                  <ConnectionString>$TemplateConfig/ConnectionString$</ConnectionString>
+                  <Query>$TemplateConfig/Query$</Query>
+                  <QueryName>$TemplateConfig/QueryName$</QueryName>
+                </DataSource>
+              </DataSources>
+              <WriteActions>
+                <WriteAction ID="WA" TypeID="$Reference/SC$Microsoft.SystemCenter.CollectPerformanceData" />
+                <WriteAction ID="WADWH" TypeID="$Reference/SCDW$Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData" />
+              </WriteActions>
+            </Rule>
+          </Rules>
+          <Monitors>
+            <UnitMonitor ID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$"
+                         Accessibility="Internal"
+                         Enabled="true"
+                         Target="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"
+                         ParentMonitorID="$Reference/Health$System.Health.PerformanceState"
+                         Remotable="true"
+                         Priority="Normal"
+                         TypeID="$Reference/Library$OleDbQueryMonitorConsecutiveUnitMonitorType"
+                         ConfirmDelivery="false"
+                         RunAs="$Reference/Library$OleDBQueryMonitoring.PrivilegedMonitoringAccount">
+              <Category>AvailabilityHealth</Category>
+              <AlertSettings AlertMessage="QueryOleDbMonitor.OleDBQueryUnitMonitor.AlertMessage.$TemplateConfig/TemplateIdString$">
+                <AlertOnState>Error</AlertOnState>
+                <AutoResolve>true</AutoResolve>
+                <AlertPriority>Normal</AlertPriority>
+                <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+                <AlertParameters>
+                  <AlertParameter1>$Data/Context/DataItem/Property[@Name='ErrorMessage']$</AlertParameter1>
+                  <AlertParameter2>$Data/Context/DataItem/Property[@Name='Value']$</AlertParameter2>
+                  <AlertParameter3>$Data/Context/DataItem/Property[@Name='MetricType']$</AlertParameter3>
+                  <AlertParameter4>$Data/Context/DataItem/Property[@Name='Direction']$</AlertParameter4>
+                  <AlertParameter5>$Data/Context/DataItem/Property[@Name='Threshold']$</AlertParameter5>
+                  <AlertParameter6>$Data/Context/DataItem/Property[@Name='QueryName']$</AlertParameter6>
+                  <AlertParameter7>$Data/Context/DataItem/Property[@Name='ConnectionString']$</AlertParameter7>
+                  <AlertParameter8>$Data/Context/DataItem/Property[@Name='Query']$</AlertParameter8>
+                </AlertParameters>
+              </AlertSettings>
+              <OperationalStates>
+                <OperationalState ID="OK" MonitorTypeStateID="OK" HealthState="Success" />
+                <OperationalState ID="ERROR" MonitorTypeStateID="ERROR" HealthState="Error" />
+              </OperationalStates>
+              <Configuration>
+                <IntervalSeconds>$TemplateConfig/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$TemplateConfig/SyncTime$</SyncTime>
+                <ConnectionString>$TemplateConfig/ConnectionString$</ConnectionString>
+                <Query>$TemplateConfig/Query$</Query>
+                <StartDay>$TemplateConfig/StartDay$</StartDay>
+                <EndDay>$TemplateConfig/EndDay$</EndDay>
+                <DaysOfWeekMask>$TemplateConfig/DaysOfWeekMask$</DaysOfWeekMask>
+                <QueryName>$TemplateConfig/QueryName$</QueryName>
+                <Threshold>$TemplateConfig/Threshold$</Threshold>
+                <NumSamples>$TemplateConfig/Samples$</NumSamples>
+                <MetricType>$TemplateConfig/MetricType$</MetricType>
+                <Direction>$TemplateConfig/Direction$</Direction>
+                <ErrorMessage>$TemplateConfig/ErrorMessage$</ErrorMessage>
+              </Configuration>
+            </UnitMonitor>
+            <DependencyMonitor ID="QueryOleDbMonitor.OleDBQueryMonitoringGroupDependencyMonitor" 
+                               Accessibility="Internal" 
+                               Enabled="true" 
+                               Target="$Reference/Library$OleDBQueryMonitoringGroup" 
+                               ParentMonitorID="Health!System.Health.EntityState" Remotable="true" Priority="Normal" RelationshipType="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" MemberMonitor="Health!System.Health.EntityState">
+              <Category>AvailabilityHealth</Category>
+              <Algorithm>WorstOf</Algorithm>
+            </DependencyMonitor>
+          </Monitors>
+          <Overrides>
+            <SecureReferenceOverride
+              ID="QueryOleDbMonitor.SimpleAuthenticationAccount.$TemplateConfig/TemplateIdString$.Override"
+              Context="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"
+              Enforced="false"
+              SecureReference="OleDb.$TemplateConfig/TemplateIdString$.SimpleAuthenticationAccount">
+              <Value>$TemplateConfig/RunAsAccount$</Value>
+            </SecureReferenceOverride>
+          </Overrides>
         </Monitoring>
+        <Presentation>
+          <StringResources>
+            <StringResource ID="QueryOleDbMonitor.OleDBQueryUnitMonitor.AlertMessage.$TemplateConfig/TemplateIdString$" />
+          </StringResources>
+        </Presentation>
+        <LanguagePacks>
+          <LanguagePack ID="ENU" IsDefault="true">
+            <DisplayStrings>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$">
+                <Name>Ole DB Query Unit Monitor</Name>
+              </DisplayString>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.AlertMessage.$TemplateConfig/TemplateIdString$">
+                <Name>Attention! The query returned a suspicious result</Name>
+                <Description>
+                  Attention {0}!
+                  The return value {1} in {2} is {3} then {4}.
+
+                  Details
+
+                  Query Name: {5}
+                  ConnectionString: {6}
+                  Query: {7}
+                </Description>
+              </DisplayString>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$" SubElementID="OK">
+                <Name>OK</Name>
+                <Description>OK</Description>
+              </DisplayString>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$" SubElementID="ERROR">
+                <Name>ERROR</Name>
+                <Description>ERROR</Description>
+              </DisplayString>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDbQueryPerformaceCollection.$TemplateConfig/TemplateIdString$">
+                <Name>OleDb Query Performance Collection</Name>
+                <Description>Description for the new rule</Description>
+              </DisplayString>
+              <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryMonitoringGroupDependencyMonitor">
+                <Name>OleDB Query Monitoring Group Dependency Monitor</Name>
+                <Description></Description>
+              </DisplayString>
+              <DisplayString ElementID="OleDb.$TemplateConfig/TemplateIdString$.SimpleAuthenticationAccount">
+                <Name>$TemplateConfig/Name$ OLEDB monitoring Simple Authentication Profile</Name>
+                <Description>If specified, this login name and password can be referenced in the connection string to connect to $TemplateConfig/Name$ for alternative authentication model.</Description>
+              </DisplayString>
+            </DisplayStrings>
+          </LanguagePack>
+        </LanguagePacks>
       </Implementation>
     </Template>
   </Templates>

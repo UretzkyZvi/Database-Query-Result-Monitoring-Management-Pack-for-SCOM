@@ -1,28 +1,27 @@
 ﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TypeDefinitions>
     <EntityTypes>
-      
       <ClassTypes>
         <ClassType ID="OleDBQueryMonitoring" Base="Windows!Microsoft.Windows.LocalApplication" Abstract="false" Accessibility="Public" Singleton="false" Hosted="true">
-          <Property Type="string" ID ="UniqueID" Key="true"/>
-          <Property Type="string" ID ="Instance" Key="false"/>
-          <Property Type="string" ID ="Database" Key="false"/>
-          <Property Type="string" ID ="QueryName" Key="false"/>
-          <Property Type="string" ID ="StartDay" Key="false"/>
-          <Property Type="string" ID ="EndDay" Key="false"/>
-          <Property Type="string" ID ="SyncTime" Key="false"/>
-          <Property Type="int"    ID ="IntervalSeconds" Key="false"/>
-          <Property Type="string" ID ="Query" Key="false"/>
-          <Property Type="int"    ID ="DaysOfWeekMask" Key="false"/>
-          <Property Type="string" ID ="GroupName" Key="false"/>
-          <Property Type="string" ID ="Direction" Key="false"/>
-          <Property Type="string" ID ="ErrorMessage" Key="false"/>
-          <Property Type="string" ID ="MetricType" Key="false"/>
-          <Property Type="int"    ID ="Samples" Key="false"/>
-          <Property Type="double" ID ="Threshold" Key="false"/>
+          <Property Type="string" ID ="UniqueID" Key="true" />
+          <Property Type="string" ID ="Instance" Key="false" />
+          <Property Type="string" ID ="Database" Key="false" />
+          <Property Type="string" ID ="QueryName" Key="false" />
+          <Property Type="string" ID ="StartDay" Key="false" />
+          <Property Type="string" ID ="EndDay" Key="false" />
+          <Property Type="string" ID ="SyncTime" Key="false" />
+          <Property Type="int"    ID ="IntervalSeconds" Key="false" />
+          <Property Type="string" ID ="Query" Key="false" />
+          <Property Type="int"    ID ="DaysOfWeekMask" Key="false" />
+          <Property Type="string" ID ="GroupName" Key="false" />
+          <Property Type="string" ID ="Direction" Key="false" />
+          <Property Type="string" ID ="ErrorMessage" Key="false" />
+          <Property Type="string" ID ="MetricType" Key="false" />
+          <Property Type="int"    ID ="Samples" Key="false" />
+          <Property Type="double" ID ="Threshold" Key="false" />
         </ClassType>
         <ClassType ID="OleDBQueryMonitoringGroup" Accessibility="Public" Base="Group!Microsoft.SystemCenter.InstanceGroup" Abstract="false" Hosted="false" Singleton="false">
-          <Property Type="string" ID ="Name" Key="true"/>
+          <Property Type="string" ID ="Name" Key="true" />
         </ClassType>
       </ClassTypes>
       <RelationshipTypes>
@@ -33,14 +32,15 @@
       </RelationshipTypes>
     </EntityTypes>
     <SecureReferences>
-      <SecureReference Accessibility="Public" ID="OleDBQueryMonitoringRunAsProfile" />
+      <SecureReference Accessibility="Public" ID="OleDBQueryMonitoring.PrivilegedMonitoringAccount" Context="System!System.Entity" />
     </SecureReferences>
   </TypeDefinitions>
   <LanguagePacks>
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
-        <DisplayString ElementID="OleDBQueryMonitoringRunAsProfile">
-          <Name>OleDB Query Monitoring Run As Profile</Name>
+        <DisplayString ElementID="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
+          <Name>OleDB Query Monitoring  Action Profile</Name>
+          <Description>This profile is used to monitor OLE DB Data source for Integrated security.</Description>
         </DisplayString>
         <DisplayString ElementID="OleDBQueryMonitoring">
           <Name>OleDB Query Monitoring Instance</Name>
@@ -99,10 +99,10 @@
         <DisplayString ElementID="OleDBQueryMonitoringGroup" SubElementID="Name">
           <Name>Group Name</Name>
         </DisplayString>
-        <DisplayString ElementID="OleDBQueryMonitoringGroup" >
+        <DisplayString ElementID="OleDBQueryMonitoringGroup">
           <Name>OleDB Query Monitoring Group</Name>
         </DisplayString>
-        <DisplayString ElementID="OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" >
+        <DisplayString ElementID="OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring">
           <Name>OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring</Name>
         </DisplayString>
       </DisplayStrings>

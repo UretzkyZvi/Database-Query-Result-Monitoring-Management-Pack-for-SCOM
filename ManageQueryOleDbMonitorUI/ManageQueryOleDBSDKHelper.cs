@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EnterpriseManagement;
+﻿using Microsoft.EnterpriseManagement;
 using Microsoft.EnterpriseManagement.Common;
 using Microsoft.EnterpriseManagement.Configuration;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
 using Microsoft.EnterpriseManagement.Monitoring;
+using Microsoft.Win32.SafeHandles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ManageQueryOleDbMonitorUI
 {
@@ -35,6 +33,12 @@ namespace ManageQueryOleDbMonitorUI
 
     public class ManageQueryOleDBSDKHelper : IDisposable
     {
+        // Flag: Has Dispose already been called?
+        private bool disposed = false;
+
+        // Instantiate a SafeHandle instance.
+        private SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
+
         private ManagementGroup managementGroup;
 
         public ManageQueryOleDBSDKHelper(ManagementGroup managementGroup)
@@ -42,23 +46,23 @@ namespace ManageQueryOleDbMonitorUI
             this.managementGroup = managementGroup;
         }
 
-        internal IObjectReader<EnterpriseManagementObject> GetObjectsByName(string name,ManagementPackClass cls)
+        // Public implementation of Dispose pattern callable by consumers.
+        public void Dispose()
         {
-            return managementGroup.EntityObjects.GetObjectReader<EnterpriseManagementObject>(new MonitoringObjectGenericCriteria(string.Format("Name = '{0}'", name)), cls, ObjectQueryOptions.Default);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         internal IObjectReader<EnterpriseManagementObject> GetEnterpriseManagementObjects(ManagementPackClass classtype)
         {
             try
             {
-               
                 return managementGroup.EntityObjects.GetObjectReader<EnterpriseManagementObject>(classtype, ObjectQueryOptions.Default);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         internal IObjectReader<EnterpriseManagementObject> GetEnterpriseManagementObjects(string managementPackName, string className)
@@ -73,47 +77,43 @@ namespace ManageQueryOleDbMonitorUI
             {
                 throw new Exception(string.Format("Error Management Pack {1} not exist in {0} Management Group", managementGroup.Name, managementPackName));
             }
-
         }
 
         internal ManagementPackClass GetManagementPackClass(string managementPackName, string className)
         {
             IList<ManagementPack> mps = managementGroup.ManagementPacks.GetManagementPacks(new ManagementPackCriteria(string.Format("Name = '{0}'", managementPackName)));
-            if (mps == null)
-            {
-                throw new Exception(string.Format("Error Management Pack {1} not exist in {0} Management Group", managementGroup.Name, managementPackName));
-            }
-            if (mps.Count>=1)
+
+            if (mps.Count != 0)
             {
                 ManagementPackClass requestClass = managementGroup.EntityTypes.GetClass(className, mps[0]);
+                if (requestClass == null)
+                {
+                    throw new Exception(string.Format("Error Class {0} not exist in {1} Management Pack", className, managementPackName));
+                }
                 return requestClass;
             }
-            throw new Exception(string.Format("Error Class {0} not exist in {1} Management Pack", className, managementPackName));
+            else
+            {
+                return null;
+            }
+        }
+
+        internal IObjectReader<EnterpriseManagementObject> GetObjectsByName(string name, ManagementPackClass cls)
+        {
+            return managementGroup.EntityObjects.GetObjectReader<EnterpriseManagementObject>(new MonitoringObjectGenericCriteria(string.Format("Name = '{0}'", name)), cls, ObjectQueryOptions.Default);
         }
 
         internal IList<EnterpriseManagementObject> GetRelatedObjects(Guid objectID, string managementPackName, string className)
         {
             ManagementPackClass rClass = GetManagementPackClass(managementPackName, className);
-            if (rClass!=null)
+            if (rClass != null)
             {
-               return managementGroup.EntityObjects.GetRelatedObjects<EnterpriseManagementObject>(objectID, rClass, TraversalDepth.Recursive, ObjectQueryOptions.Default);
+                return managementGroup.EntityObjects.GetRelatedObjects<EnterpriseManagementObject>(objectID, rClass, TraversalDepth.Recursive, ObjectQueryOptions.Default);
             }
             else
             {
                 throw new Exception(string.Format("Error no related objects"));
             }
-        }
-
-        // Flag: Has Dispose already been called?
-        bool disposed = false;
-        // Instantiate a SafeHandle instance.
-        SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
-
-        // Public implementation of Dispose pattern callable by consumers.
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         // Protected implementation of Dispose pattern.

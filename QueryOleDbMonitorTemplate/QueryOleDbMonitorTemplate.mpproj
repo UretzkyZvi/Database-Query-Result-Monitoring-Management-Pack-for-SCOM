@@ -6,7 +6,7 @@
     <RootNamespace>QueryOleDbMonitorTemplate</RootNamespace>
     <Name>QueryOleDbMonitorTemplate</Name>
     <ManagementPackName>QueryOleDbMonitorTemplate</ManagementPackName>
-    <Version>1.0.0.46</Version>
+    <Version>2.0.0.1</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
     <MpFrameworkProfile>OM</MpFrameworkProfile>
     <ProductVersion>1.1.0.0</ProductVersion>
@@ -18,7 +18,7 @@
     <Company>Uretzky</Company>
     <Copyright>Copyright (c) Uretzky. All rights reserved.</Copyright>
     <DelaySigning>False</DelaySigning>
-    <AssemblyOriginatorKeyFile>C:\Users\Uretzky\Source\Repos\Monitor-Applications-Using-SQL-Queries\QueryOleDbMonitorLibrary\Key\SCOMKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>F:\Projects\QueryOleDbMonitor\QueryOleDbMonitorLibrary\Key\SCOMKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -79,11 +79,6 @@
     <Folder Include="Resources" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ManageQueryOleDbMonitorUI.dll">
-      <SubType>Content</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="FoldersAndViews.mpx">
       <SubType>Code</SubType>
     </Compile>
@@ -107,6 +102,11 @@
       <Private>True</Private>
       <Alias>Library</Alias>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ManageQueryOleDbMonitorUI.dll">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.EnterpriseManagement.Mom.Internal.UI.Common;
 using Microsoft.EnterpriseManagement.UI;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
-using Microsoft.EnterpriseManagement.Mom.Internal.UI.Common;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ManageQueryOleDbMonitorUI
 {
     public partial class SchedulerSettings : UIPage
     {
         #region Properites and Enum
+
         [Flags]
         public enum DaysMask
         {
@@ -30,17 +27,18 @@ namespace ManageQueryOleDbMonitorUI
 
         private int daysOfWeek;
 
-        #endregion
+        #endregion Properites and Enum
 
         #region Constructor
+
         public SchedulerSettings()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Private Methods
-
 
         private SortedDictionary<string, int> Days()
         {
@@ -50,7 +48,6 @@ namespace ManageQueryOleDbMonitorUI
                 days.Add(((DaysMask)item).ToString(), item);
             }
             return days;
-
         }
 
         private bool ValidatePageConfiguration()
@@ -60,7 +57,6 @@ namespace ManageQueryOleDbMonitorUI
             {
                 errorProvider.SetError(cbxDays, string.Format(CultureInfo.CurrentUICulture, "Select at least one day", new object[0]));
                 return false;
-
             }
             DateTime dt1;
             DateTime dt2;
@@ -100,18 +96,22 @@ namespace ManageQueryOleDbMonitorUI
             {
                 case "Seconds":
                     return (int)txtIntervalSeconds.Value;
+
                 case "Minutes":
                     return (int)txtIntervalSeconds.Value * 60;
+
                 case "Hours":
                     return (int)txtIntervalSeconds.Value * 60 * 60;
+
                 case "Days":
                     return (int)txtIntervalSeconds.Value * 60 * 60 * 24;
+
                 default:
                     return 0;
             }
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Public Methods
 
@@ -120,7 +120,7 @@ namespace ManageQueryOleDbMonitorUI
             cbxDays.DataSource = new BindingSource(Days().OrderBy(x => x.Value), null);
             cbxDays.DisplayMember = "Key";
             cbxDays.ValueMember = "Value";
-         
+
             if (daysOfWeek != 0)
             {
                 DaysMask DaysVal = (DaysMask)Enum.ToObject(typeof(DaysMask), daysOfWeek);
@@ -128,7 +128,6 @@ namespace ManageQueryOleDbMonitorUI
                 foreach (DaysMask item in values)
                 {
                     cbxDays.SetItemChecked(cbxDays.Items.IndexOf(new KeyValuePair<string, int>(item.ToString(), (int)item)), true);
-                   
                 }
             }
             else
@@ -161,7 +160,6 @@ namespace ManageQueryOleDbMonitorUI
                     txtStartTime.Text = config.StartDay;
                     txtEndTime.Text = config.EndDay;
                     SetSharedUserData();
-
                 }
                 catch (ArgumentNullException exception)
                 {
@@ -175,7 +173,6 @@ namespace ManageQueryOleDbMonitorUI
             IsConfigValid = ValidatePageConfiguration();
             base.LoadPageConfig();
         }
-
 
         public override bool SavePageConfig()
         {
@@ -196,7 +193,6 @@ namespace ManageQueryOleDbMonitorUI
             return true;
         }
 
-
-        #endregion
+        #endregion Public Methods
     }
 }

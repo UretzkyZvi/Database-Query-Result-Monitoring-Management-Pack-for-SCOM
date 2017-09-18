@@ -11,135 +11,6 @@ namespace ManageQueryOleDbMonitorUI
     [Serializable, XmlType(AnonymousType = true), XmlRoot(Namespace = "", IsNullable = false)]
     public class TemplateInputConfig
     {
-        //// Fields
-        //private string nameField;
-        //private string descriptionField;
-        //private string templateIdStringField;
-        //private string fullInstanceNameField;
-        //private string databaseName;
-        //private string query;
-        //private int intervalSeconds;
-        //private string dbEnginId;
-        //private string instanceName;
-
-        //// Properties
-
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        return this.descriptionField;
-        //    }
-        //    set
-        //    {
-        //        this.descriptionField = value;
-        //    }
-        //}
-
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        return this.nameField;
-        //    }
-        //    set
-        //    {
-        //        this.nameField = value;
-        //    }
-        //}
-
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string TemplateIdString
-        //{
-        //    get
-        //    {
-        //        return this.templateIdStringField;
-        //    }
-        //    set
-        //    {
-        //        this.templateIdStringField = value;
-        //    }
-        //}
-
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string FullInstanceNameName
-        //{
-        //    get
-        //    {
-        //        return this.fullInstanceNameField;
-        //    }
-        //    set
-        //    {
-        //        this.fullInstanceNameField = value;
-        //    }
-        //}
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string DatabaseName
-        //{
-        //    get
-        //    {
-        //        return databaseName;
-        //    }
-
-        //    set
-        //    {
-        //        databaseName = value;
-        //    }
-        //}
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string Query
-        //{
-        //    get
-        //    {
-        //        return query;
-        //    }
-
-        //    set
-        //    {
-        //        query = value;
-        //    }
-        //}
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public int IntervalSeconds
-        //{
-        //    get
-        //    {
-        //        return intervalSeconds;
-        //    }
-
-        //    set
-        //    {
-        //        intervalSeconds = value;
-        //    }
-        //}
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string DBEngineId
-        //{
-        //    get
-        //    {
-        //        return dbEnginId;
-        //    }
-
-        //    set
-        //    {
-        //        dbEnginId = value;
-        //    }
-        //}
-        //[XmlElement(Form = XmlSchemaForm.Unqualified)]
-        //public string InstanceName
-        //{
-        //    get
-        //    {
-        //        return instanceName;
-        //    }
-
-        //    set
-        //    {
-        //        instanceName = value;
-        //    }
-        //}
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string Name { get; set; }
@@ -181,7 +52,13 @@ namespace ManageQueryOleDbMonitorUI
         public double Threshold { get; set; }
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public string ConnectionString { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string PrincipalName { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public string RunAsAccount { get; set; }
 
     }
 }

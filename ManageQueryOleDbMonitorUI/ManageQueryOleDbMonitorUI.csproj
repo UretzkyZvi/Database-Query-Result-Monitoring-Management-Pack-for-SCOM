@@ -98,6 +98,7 @@
     <Compile Include="Dialog\GroupPickerControl.Designer.cs">
       <DependentUpon>GroupPickerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="RunAsAccount.cs" />
     <Compile Include="SchedulerSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,15 +155,6 @@
     <EmbeddedResource Include="MonitoringSettings.resx">
       <DependentUpon>MonitoringSettings.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Microsoft.EnterpriseManagement.UI.Authoring.dll" />
-    <Content Include="Resources\Microsoft.EnterpriseManagement.UI.ConsoleFramework.dll" />
-    <Content Include="Resources\Microsoft.EnterpriseManagement.UI.Extensibility.dll" />
-    <Content Include="Resources\Microsoft.EnterpriseManagement.UI.Foundation.dll" />
-    <Content Include="Resources\Microsoft.Mom.Common.dll" />
-    <Content Include="Resources\Microsoft.MOM.UI.Common.dll" />
-    <Content Include="Resources\Microsoft.MOM.UI.Components.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

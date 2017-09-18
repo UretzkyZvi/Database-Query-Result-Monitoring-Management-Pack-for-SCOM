@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
@@ -28,7 +24,14 @@ namespace ManageQueryOleDbMonitorUI
 
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string MetricType { get; set; }
+
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string PrincipalName { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public string RunAsAccount { get; set; }
+
+        [XmlElement(Form = XmlSchemaForm.Unqualified)]
+        public string ConnectionString { get; set; }
     }
 }

@@ -3,7 +3,7 @@
     <Views>
       <View Target="Library!OleDBQueryMonitoring" TypeID="SC!Microsoft.SystemCenter.StateViewType" Accessibility="Public" ID="OleDBQueryMonitoringTemplateViewState">
         <Category>StateCollection</Category>
-        <Criteria/>
+        <Criteria />
         <Presentation>
           <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
             <Name>State</Name>
@@ -105,7 +105,7 @@
           </ResolutionState>
         </Criteria>
       </View>
-      
+
       <View ID="QueryOleDbMonitorPerfView"
             Accessibility="Internal"
             Enabled="true"
@@ -125,11 +125,10 @@
         <Category>Custom</Category>
         <Criteria />
       </View>
-      
     </Views>
     <Folders>
       <Folder ID="OleDBQueryMonitoringTemplateFolderRoot" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
-      <Folder ID="OleDBQueryMonitoringTemplateFolder" Accessibility="Public" ParentFolder="OM!Microsoft.SystemCenter.OperationsManager.Authoring.TemplateParsers.Root"/>
+      <Folder ID="OleDBQueryMonitoringTemplateFolder" Accessibility="Public" ParentFolder="OM!Microsoft.SystemCenter.OperationsManager.Authoring.TemplateParsers.Root" />
     </Folders>
     <FolderItems>
       <FolderItem ID="OleDBQueryMonitoringTemplateViewStateFolderItem" ElementID="OleDBQueryMonitoringTemplateViewState" Folder="OleDBQueryMonitoringTemplateFolderRoot" />
@@ -138,17 +137,15 @@
 
       <FolderItem ElementID="QueryOleDbMonitorAlertView"
                ID="QueryOleDbMonitorAlertViewItemFolderItem"
-               Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
+               Folder="OleDBQueryMonitoringTemplateFolderRoot" />
 
       <FolderItem ElementID="QueryOleDbMonitorPerfView"
                   ID="QueryOleDbMonitorPerfViewItemFolderItem"
-                  Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
-
+                  Folder="OleDBQueryMonitoringTemplateFolderRoot" />
 
       <FolderItem ElementID="QueryOleDbMonitorGroupStateView"
                   ID="QueryOleDbMonitorGroupStateViewItemFolderItem"
-                  Folder="OleDBQueryMonitoringTemplateFolderRoot"/>
-      
+                  Folder="OleDBQueryMonitoringTemplateFolderRoot" />
     </FolderItems>
   </Presentation>
   <LanguagePacks>

@@ -2,7 +2,7 @@
   <TypeDefinitions>
     <MonitorTypes>
 
-      <UnitMonitorType Accessibility="Public" ID="OleDbQueryMonitorConsecutiveUnitMonitorType" RunAs="OleDBQueryMonitoringRunAsProfile">
+      <UnitMonitorType Accessibility="Public" ID="OleDbQueryMonitorConsecutiveUnitMonitorType" >
         <MonitorTypeStates>
           <MonitorTypeState ID="OK" />
           <MonitorTypeState ID="ERROR" />
@@ -16,12 +16,11 @@
           <xsd:element minOccurs="1" name="EndDay" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="DaysOfWeekMask" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="Threshold" type="xsd:double"/>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Threshold" type="xsd:double" />
           <xsd:element minOccurs="1" name="NumSamples" type="xsd:integer" />
           <xsd:element minOccurs="1" name="MetricType" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="Direction" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="ErrorMessage" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
-          
         </Configuration>
         <MonitorImplementation>
           <MemberModules>
@@ -69,7 +68,7 @@
 
                 $propertyBag
               </ScriptBody>
-              <SnapIns/>
+              <SnapIns />
               <Parameters>
                 <Parameter>
                   <Name>value</Name>
@@ -146,7 +145,7 @@
             <RegularDetection MonitorTypeStateID="OK">
               <Node ID="ConditionOK">
                 <Node ID="Consecutive">
-                  <Node ID="DS"/>
+                  <Node ID="DS" />
                 </Node>
               </Node>
             </RegularDetection>
@@ -154,7 +153,7 @@
               <Node ID="OutputDetails">
                 <Node ID="ConditionError">
                   <Node ID="Consecutive">
-                    <Node ID="DS"/>
+                    <Node ID="DS" />
                   </Node>
                 </Node>
               </Node>
@@ -162,17 +161,17 @@
           </RegularDetections>
           <OnDemandDetections>
             <OnDemandDetection MonitorTypeStateID="OK">
-               <Node ID="ConditionOK">
+              <Node ID="ConditionOK">
                 <Node ID="Consecutive">
-                  <Node ID="ProbeOnDemand"/>
+                  <Node ID="ProbeOnDemand" />
                 </Node>
               </Node>
             </OnDemandDetection>
             <OnDemandDetection MonitorTypeStateID="ERROR">
-               <Node ID="OutputDetails">
+              <Node ID="OutputDetails">
                 <Node ID="ConditionError">
                   <Node ID="Consecutive">
-                    <Node ID="ProbeOnDemand"/>
+                    <Node ID="ProbeOnDemand" />
                   </Node>
                 </Node>
               </Node>
@@ -180,7 +179,6 @@
           </OnDemandDetections>
         </MonitorImplementation>
       </UnitMonitorType>
-
     </MonitorTypes>
   </TypeDefinitions>
 </ManagementPackFragment>

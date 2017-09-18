@@ -2,7 +2,7 @@
   <TypeDefinitions>
     <ModuleTypes>
 
-      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorMapperWithDateCondtion">
+      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorMapperWithDateCondtion" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
           <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -36,7 +36,7 @@
                         </Daily>
                       </Windows>
                     </WeeklySchedule>
-                    <ExcludeDates/>
+                    <ExcludeDates />
                   </Schedule>
                   <UseCurrentTime>true</UseCurrentTime>
                 </SchedulerFilter>
@@ -44,7 +44,7 @@
             </MemberModules>
             <Composition>
               <Node ID="FILTERTIMER">
-                <Node ID="DS"/>
+                <Node ID="DS" />
               </Node>
             </Composition>
           </Composite>
@@ -52,7 +52,7 @@
         <OutputType>Perf!System.Performance.Data</OutputType>
       </DataSourceModuleType>
 
-      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollection">
+      <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollection" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
           <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -78,7 +78,7 @@
             </MemberModules>
             <Composition>
               <Node ID="mapper">
-                <Node ID="PR"/>
+                <Node ID="PR" />
               </Node>
             </Composition>
           </Composite>
@@ -86,7 +86,7 @@
         <OutputType>Perf!System.Performance.Data</OutputType>
       </DataSourceModuleType>
 
-      <DataSourceModuleType ID="OleDbQueryMonitorDataSource" Accessibility="Public" Batching="false">
+      <DataSourceModuleType ID="OleDbQueryMonitorDataSource" Accessibility="Public" Batching="false" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
           <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="0" name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -121,7 +121,7 @@
         <OutputType>System!System.OleDbData</OutputType>
       </DataSourceModuleType>
 
-      <ProbeActionModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollectionProbe">
+      <ProbeActionModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollectionProbe" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
           <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -147,7 +147,7 @@
             <Composition>
               <Node ID="mapper">
                 <Node ID="PR">
-                  <Node ID="PassThrough"/>
+                  <Node ID="PassThrough" />
                 </Node>
               </Node>
             </Composition>
@@ -156,9 +156,6 @@
         <OutputType>Perf!System.Performance.Data</OutputType>
         <TriggerOnly>true</TriggerOnly>
       </ProbeActionModuleType>
-
     </ModuleTypes>
   </TypeDefinitions>
-
-
 </ManagementPackFragment>

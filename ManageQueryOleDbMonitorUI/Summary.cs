@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.EnterpriseManagement.Configuration;
 using Microsoft.EnterpriseManagement.UI;
-using Microsoft.EnterpriseManagement.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace ManageQueryOleDbMonitorUI
 {
     public partial class Summary : UIPage
     {
         #region Properties
+
         private string name;
         private string description;
         private ManagementPack outputManagementPack;
@@ -35,16 +30,21 @@ namespace ManageQueryOleDbMonitorUI
         public int Samples { get; set; }
         public double Threshold { get; set; }
         public string PrincipalName { get; set; }
-        #endregion
+        public string ConnectionString { get; set; }
+
+        #endregion Properties
 
         #region Constructor
+
         public Summary()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Public Methods
+
         public override bool OnSetActive()
         {
             GetSharedUserData();
@@ -61,16 +61,33 @@ namespace ManageQueryOleDbMonitorUI
                 ManagementPack mp = ManagementGroup.ManagementPacks.GetManagementPack(SystemManagementPack.Windows);
                 DestinationManagementPack.References.Add("Windows", mp);
             }
-
+            if (!DestinationManagementPack.References.ContainsKey("SCDW"))
+            {
+                ManagementPackCriteria mpCriteria = new ManagementPackCriteria("Name='Microsoft.SystemCenter.DataWarehouse.Library'");
+                IList<ManagementPack> managementPacks =
+                 ManagementGroup.ManagementPacks.GetManagementPacks(mpCriteria);
+                //ManagementPack mp = ManagementGroup.ManagementPacks.GetManagementPack(SystemManagementPack.SystemCenter);
+                DestinationManagementPack.References.Add("SCDW", managementPacks[0]);
+            }
             return base.SavePageConfig();
+        }
+
+        protected override void PageContextObjectCommitting(ObjectCommittingEventArgs e)
+        {
+            base.PageContextObjectCommitting(e);
+        }
+
+        protected override void PageContextObjectChanged(ObjectChangedEventArgs args)
+        {
+            base.PageContextObjectChanged(args);
         }
 
         protected override void PageContextObjectCommitted(EventArgs e)
         {
-
             base.PageContextObjectCommitted(e);
         }
-        #endregion
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -96,7 +113,7 @@ namespace ManageQueryOleDbMonitorUI
             Samples = int.Parse(SharedUserData["MonitoringSettings.Samples"].ToString());
             Threshold = double.Parse(SharedUserData["MonitoringSettings.Threshold"].ToString());
             PrincipalName = SharedUserData["ConnectionAndQuery.PrincipalName"] as string;
-
+            ConnectionString = SharedUserData["ConnectionAndQuery.ConnectionString"] as string;
         }
 
         private void SetListViewItems()
@@ -120,7 +137,6 @@ namespace ManageQueryOleDbMonitorUI
             AddSummaryItem("Instance", Instance.ToUpper());
             AddSummaryItem("Database", Database);
             AddSummaryItem("Query", Query);
-            AddSummaryItem("Error Message", ErrorMessage);
 
             summaryListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             summaryListView.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -132,6 +148,7 @@ namespace ManageQueryOleDbMonitorUI
             item.SubItems.Add(value);
             summaryListView.Items.Add(item);
         }
-        #endregion
+
+        #endregion Private Methods
     }
 }
