@@ -34,7 +34,7 @@ Please always test new management packs in a test environment before importing t
 ![Authoring tempaltes](/Images/2017-06-09%2011_47_50-OleDB%20Query%20Monitoring%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
 ![wizard step 1](/Images/2017-06-09%2011_24_00-Add%20Monitoring%20Wizard.png?raw=true)
 5. Follow the wizard instruction
-![wizard step 2](/Images/2017-06-09%2011_24_47-Management%20Pack%20Templates%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
+![wizard step 2](/Images/OleDB%20Monitoring/ConnectionAndQuery_1.png?raw=true)
 ![wizard step 3](/Images/2017-06-09%2011_25_03-Management%20Pack%20Templates%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
 ![wizard step 4](/Images/2017-06-09%2011_28_05-Add%20Monitoring%20Wizard.png?raw=true)
 ![wizard step 5](/Images/2017-06-09%2011_29_01-Add%20Monitoring%20Wizard.png?raw=true)
