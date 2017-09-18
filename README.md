@@ -38,6 +38,8 @@ Please always test new management packs in a test environment before importing t
 ![wizard step 2](/Images/OleDB%20Monitoring/ConnectionAndQuery_1.png?raw=true)
 ![wizard step 3](/Images/OleDB%20Monitoring/ConnectionAndQuery_SelectDatabase.png?raw=true)
 ![wizard step 4](/Images/OleDB%20Monitoring/ConnectionAndQuery_Full.png?raw=true)
+Or with SQL Authentication
+![wizard step 8](/Images/OleDB%20Monitoring/ConnectionAndQuery_FullAuthentication.png?raw=true)
 ![wizard step 5](/Images/OleDB%20Monitoring/MonitoringSettings.png?raw=true)
 ![wizard step 6](/Images/OleDB%20Monitoring/MonitoringSettings_Full.png?raw=true)
 ![wizard step 7](/Images/OleDB%20Monitoring/SchedulerSettings.png?raw=true)
