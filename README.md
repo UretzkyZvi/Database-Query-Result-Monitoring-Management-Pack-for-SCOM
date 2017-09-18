@@ -13,6 +13,7 @@ If you use this and you like it, invite me to a coffee :-)
 
 ## Features
 * Easy Authoring template to create and delete queries.
+* New! Support for SQL Authentication. 
 * Dedicated views in SCOM console.
 * Performance data collection.
 * Monitor using consecutive samples condition and schedule filter.
@@ -35,13 +36,12 @@ Please always test new management packs in a test environment before importing t
 ![wizard step 1](/Images/2017-06-09%2011_24_00-Add%20Monitoring%20Wizard.png?raw=true)
 5. Follow the wizard instruction
 ![wizard step 2](/Images/OleDB%20Monitoring/ConnectionAndQuery_1.png?raw=true)
-![wizard step 3](/Images/2017-06-09%2011_25_03-Management%20Pack%20Templates%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
-![wizard step 4](/Images/2017-06-09%2011_28_05-Add%20Monitoring%20Wizard.png?raw=true)
-![wizard step 5](/Images/2017-06-09%2011_29_01-Add%20Monitoring%20Wizard.png?raw=true)
-![wizard step 6](/Images/2017-06-09%2011_29_19-GroupChooserDialog.png?raw=true)
-![wizard step 7](/Images/2017-06-09%2011_29_52-Add%20Monitoring%20Wizard.png?raw=true)
-![wizard step 8](/Images/2017-06-09%2011_30_04-Add%20Monitoring%20Wizard.png?raw=true)
-![wizard step 9](/Images/2017-06-09%2011_31_08-OleDB%20Query%20Monitoring%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
+![wizard step 3](/Images/OleDB%20Monitoring/ConnectionAndQuery_SelectDatabase.png?raw=true)
+![wizard step 4](/Images/OleDB%20Monitoring/ConnectionAndQuery_Full.png?raw=true)
+![wizard step 5](/Images/OleDB%20Monitoring/MonitoringSettings.png?raw=true)
+![wizard step 6](/Images/OleDB%20Monitoring/MonitoringSettings_Full.png?raw=true)
+![wizard step 7](/Images/OleDB%20Monitoring/SchedulerSettings.png?raw=true)
+
 The Alert ex.
 ![wizard step 10](/Images/2017-06-09%2011_32_40-Active%20Alerts%20-%20analyticOps%20-%20Operations%20Manager.png?raw=true)
 Performace ex.
