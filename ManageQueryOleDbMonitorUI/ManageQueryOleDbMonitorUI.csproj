@@ -43,25 +43,25 @@
       <HintPath>F:\Scom2012\SDK Binaries\Microsoft.EnterpriseManagement.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.UI.Authoring">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.EnterpriseManagement.UI.Authoring.dll</HintPath>
+      <HintPath>Resources\Microsoft.EnterpriseManagement.UI.Authoring.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.UI.ConsoleFramework">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.EnterpriseManagement.UI.ConsoleFramework.dll</HintPath>
+      <HintPath>Resources\Microsoft.EnterpriseManagement.UI.ConsoleFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.UI.Extensibility">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.EnterpriseManagement.UI.Extensibility.dll</HintPath>
+      <HintPath>Resources\Microsoft.EnterpriseManagement.UI.Extensibility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.UI.Foundation">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.EnterpriseManagement.UI.Foundation.dll</HintPath>
+      <HintPath>Resources\Microsoft.EnterpriseManagement.UI.Foundation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Mom.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.Mom.Common.dll</HintPath>
+      <HintPath>Resources\Microsoft.Mom.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.MOM.UI.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.MOM.UI.Common.dll</HintPath>
+      <HintPath>Resources\Microsoft.MOM.UI.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.MOM.UI.Components">
-      <HintPath>..\..\..\..\..\..\..\Program Files\System Center Operations Manager 2012\Console\Microsoft.MOM.UI.Components.dll</HintPath>
+      <HintPath>Resources\Microsoft.MOM.UI.Components.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

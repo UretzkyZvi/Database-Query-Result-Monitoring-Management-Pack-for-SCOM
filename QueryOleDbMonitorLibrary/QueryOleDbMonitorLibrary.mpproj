@@ -18,7 +18,7 @@
     <Company>Uretzky</Company>
     <Copyright>Copyright (c) Uretzky. All rights reserved.</Copyright>
     <DelaySigning>False</DelaySigning>
-    <AssemblyOriginatorKeyFile>F:\Projects\QueryOleDbMonitor\QueryOleDbMonitorLibrary\Key\SCOMKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\Users\Uretzky\Source\Repos\Monitor-Applications-Using-SQL-Queries\QueryOleDbMonitorLibrary\Key\SCOMKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>

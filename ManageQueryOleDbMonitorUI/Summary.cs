@@ -58,16 +58,27 @@ namespace ManageQueryOleDbMonitorUI
         {
             if (!DestinationManagementPack.References.ContainsKey("Windows"))
             {
-                ManagementPack mp = ManagementGroup.ManagementPacks.GetManagementPack(SystemManagementPack.Windows);
-                DestinationManagementPack.References.Add("Windows", mp);
+                ManagementPackCriteria mpCriteria = new ManagementPackCriteria("Name='Microsoft.Windows.Library'");
+                IList<ManagementPack> managementPacks =
+                 ManagementGroup.ManagementPacks.GetManagementPacks(mpCriteria);
+                DestinationManagementPack.References.Add("Windows", managementPacks[0]);
+                mpCriteria = null;
+            }
+            if (!DestinationManagementPack.References.ContainsKey("Health"))
+            {
+                ManagementPackCriteria mpCriteria = new ManagementPackCriteria("Name='System.Health.Library'");
+                IList<ManagementPack> managementPacks =
+                 ManagementGroup.ManagementPacks.GetManagementPacks(mpCriteria);
+                DestinationManagementPack.References.Add("Health", managementPacks[0]);
+                mpCriteria = null;
             }
             if (!DestinationManagementPack.References.ContainsKey("SCDW"))
             {
                 ManagementPackCriteria mpCriteria = new ManagementPackCriteria("Name='Microsoft.SystemCenter.DataWarehouse.Library'");
                 IList<ManagementPack> managementPacks =
                  ManagementGroup.ManagementPacks.GetManagementPacks(mpCriteria);
-                //ManagementPack mp = ManagementGroup.ManagementPacks.GetManagementPack(SystemManagementPack.SystemCenter);
                 DestinationManagementPack.References.Add("SCDW", managementPacks[0]);
+                mpCriteria = null;
             }
             return base.SavePageConfig();
         }

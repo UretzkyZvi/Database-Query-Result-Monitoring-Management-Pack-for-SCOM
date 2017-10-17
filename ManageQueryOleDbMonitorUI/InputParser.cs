@@ -9,12 +9,13 @@ using Microsoft.EnterpriseManagement.Configuration;
 using Microsoft.EnterpriseManagement.Internal.UI.Authoring.Extensibility;
 using Microsoft.EnterpriseManagement.Mom.Internal.UI.Common;
 using Microsoft.EnterpriseManagement.UI;
+using System.Threading.Tasks;
 
 namespace ManageQueryOleDbMonitorUI
 {
     public class InputParser : Component, IInputConfigurationParser
     {
-        private const string ClassNamePrefix = "OleDBQueryMonitoring";
+        private const string ClassNamePrefix = "OleDBQueryMonitoring.";
         private const string DiscoveryNamePrefix = "QueryOleDbMonitorInitialDiscovery.";
         private const string ValueNodeRegex = "<Value>([^<]*)</Value>";
         private const string AccountOverrideNamePrefix = "QueryOleDbMonitor.SimpleAuthenticationAccount.";
@@ -47,19 +48,20 @@ namespace ManageQueryOleDbMonitorUI
             }
         }
 
-        private void GetMonitoringConnectionString(ITemplateContext templateContext, ref TemplateInputConfig templateConfig)
+        private void GetConnectionString(ITemplateContext templateContext, ref TemplateInputConfig templateConfig)
         {
+
             if (templateContext == null)
             {
                 throw new ArgumentNullException("templateContext");
             }
-
-            ManagementPackElementCollection<ManagementPackUnitMonitor> folderItems = SDKHelper.GetFolderItems<ManagementPackUnitMonitor>(this, templateContext.OutputFolder);           
+            MatchCollection matchs = null;
+            ManagementPackElementCollection<ManagementPackUnitMonitor> folderItems = SDKHelper.GetFolderItems<ManagementPackUnitMonitor>(this, templateContext.OutputFolder);
             foreach (ManagementPackUnitMonitor monitor in folderItems)
             {
                 if (monitor.Name.StartsWith(MonitorUnitNamePrefix, StringComparison.OrdinalIgnoreCase))
                 {
-                    MatchCollection matchs =
+                    matchs =
                         new Regex(ConnectionStringRegex, RegexOptions.CultureInvariant | RegexOptions.Compiled).Matches(monitor.Configuration);
 
                     templateConfig.ConnectionString = matchs[0].Groups[1].Value;
@@ -67,7 +69,10 @@ namespace ManageQueryOleDbMonitorUI
                     break;
                 }
             }
+
         }
+
+
         public bool LoadConfigurationXml(IPageContext pageContext)
         {
             if (pageContext == null)
@@ -82,7 +87,7 @@ namespace ManageQueryOleDbMonitorUI
             };
             GetDiscoveryConfig(templateContext, ref templateConfig);
             GetRunAsAccounts(templateContext, ref templateConfig);
-            GetMonitoringConnectionString(templateContext, ref templateConfig);
+            GetConnectionString(templateContext, ref templateConfig);
             pageContext.ConfigurationXml = XmlHelper.Serialize(templateConfig, false);
             return true;
         }
@@ -100,7 +105,7 @@ namespace ManageQueryOleDbMonitorUI
                     MatchCollection matchs =
                         new Regex(ValueNodeRegex, RegexOptions.CultureInvariant | RegexOptions.Compiled).Matches(discovery.DataSource.Configuration);
 
-                    templateConfig.TemplateIdString = matchs[0].Groups[1].Value;
+                    templateConfig.TemplateIdString = GetTemplateIdString(templateContext);// matchs[0].Groups[1].Value;
                     templateConfig.UniqueId = Guid.Parse(matchs[0].Groups[1].Value);
                     templateConfig.Instance = matchs[1].Groups[1].Value;
                     templateConfig.Database = matchs[2].Groups[1].Value;
@@ -118,7 +123,7 @@ namespace ManageQueryOleDbMonitorUI
                     templateConfig.Samples = int.Parse(matchs[14].Groups[1].Value);
                     templateConfig.Threshold = double.Parse(matchs[15].Groups[1].Value);
                     templateConfig.PrincipalName = matchs[16].Groups[1].Value;
-            
+
 
                     return;
                 }

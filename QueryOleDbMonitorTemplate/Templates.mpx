@@ -246,7 +246,11 @@
                                Accessibility="Internal" 
                                Enabled="true" 
                                Target="$Reference/Library$OleDBQueryMonitoringGroup" 
-                               ParentMonitorID="Health!System.Health.EntityState" Remotable="true" Priority="Normal" RelationshipType="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" MemberMonitor="Health!System.Health.EntityState">
+                               ParentMonitorID="$Reference/Health$System.Health.EntityState"
+                               Remotable="true" 
+                               Priority="Normal" 
+                               RelationshipType="$Reference/Library$OleDBQueryMonitoringGroupecontainOleDBQueryMonitoring" 
+                               MemberMonitor="$Reference/Health$System.Health.EntityState">
               <Category>AvailabilityHealth</Category>
               <Algorithm>WorstOf</Algorithm>
             </DependencyMonitor>
