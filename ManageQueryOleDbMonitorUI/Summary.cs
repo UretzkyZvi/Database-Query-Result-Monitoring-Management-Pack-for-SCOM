@@ -107,7 +107,7 @@ namespace ManageQueryOleDbMonitorUI
             name = SharedUserData["NameAndDescriptionPage.Name"] as string;
             description = SharedUserData["NameAndDescriptionPage.Description"] as string;
             outputManagementPack = SharedUserData["NameAndDescriptionPage.ManagementPack"] as ManagementPack;
-            UniqueID = SharedUserData["ConnectionAndQuery.UniqueID"] as string;
+            //UniqueID = SharedUserData["ConnectionAndQuery.UniqueID"] as string;
             Instance = SharedUserData["ConnectionAndQuery.Instance"] as string;
             Database = SharedUserData["ConnectionAndQuery.Database"] as string;
             QueryName = SharedUserData["NameAndDescriptionPage.Name"] as string;

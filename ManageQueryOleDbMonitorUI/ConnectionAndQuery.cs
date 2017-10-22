@@ -25,7 +25,7 @@ namespace ManageQueryOleDbMonitorUI
         private IList<EnterpriseManagementObject> Databases;
         private string principalName;
         private string templateIdString;
-        private string UniqueID;
+        //private string UniqueID;
         private Dictionary<string, string> providers;
         private List<RunAsAccount> runAsAccountList;
         private string conStr;
@@ -123,59 +123,67 @@ namespace ManageQueryOleDbMonitorUI
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            ValidatePageConfiguration();
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(conStr);
-            if (rbSQLAuth.Checked)
+            //
+            using (ManageQueryOleDBSDKHelper helper = new ManageQueryOleDBSDKHelper(ManagementGroup))
             {
-                SecureData sd = ManagementGroup.Security.GetSecureData(runAsAccountList[cmbRunAsAccount.SelectedIndex].AccountStorageIdByteArray);
-                sb.Append(string.Format("User Id={0};Password={1};", sd.Name, convertToUNSecureString(sd.Data)));
-            }
-            else
-            {
-                sb.Append("Integrated Security=SSPI;");
-            }
+                //SecureData sd = ManagementGroup.Security.GetSecureData(runAsAccountList[cmbRunAsAccount.SelectedIndex].AccountStorageIdByteArray);
 
-            using (OleDbConnection con = new OleDbConnection(sb.ToString()))
-            {
-                using (OleDbCommand cmd = new OleDbCommand(txtQuery.Text, con))
-                {
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-                        da.Fill(dt);
+                MessageBox.Show(helper.RunTestTask(txtConnectionString.Text, txtQuery.Text));
 
-                        if (dt.Rows.Count == 1 && dt.Columns.Count == 1)
-                        {
-                            double value;
-                            if (double.TryParse(dt.Rows[0][0].ToString(), out value))
-                            {
-                                MessageBox.Show("return numeric value successfully test, result value " + value);
-                            }
-                            else
-                            {
-                                MessageBox.Show("return not numeric value rewrite query, result value " + dt.Rows[0][0].ToString());
-                                IsConfigValid = false;
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("return more then one row or column");
-                            IsConfigValid = false;
-                            return;
-                        }
-                    }
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show("Error: " + EX.Message);
-                        IsConfigValid = false;
-                        return;
-                    }
-                }
             }
-            IsConfigValid = ValidatePageConfiguration();
+            //ValidatePageConfiguration();
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //sb.Append(conStr);
+            //if (rbSQLAuth.Checked)
+            //{
+            //    SecureData sd = ManagementGroup.Security.GetSecureData(runAsAccountList[cmbRunAsAccount.SelectedIndex].AccountStorageIdByteArray);
+            //    sb.Append(string.Format("User Id={0};Password={1};", sd.Name, convertToUNSecureString(sd.Data)));
+            //}
+            //else
+            //{
+            //    sb.Append("Integrated Security=SSPI;");
+            //}
+
+            //using (OleDbConnection con = new OleDbConnection(sb.ToString()))
+            //{
+            //    using (OleDbCommand cmd = new OleDbCommand(txtQuery.Text, con))
+            //    {
+            //        try
+            //        {
+            //            DataTable dt = new DataTable();
+            //            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            //            da.Fill(dt);
+
+            //            if (dt.Rows.Count == 1 && dt.Columns.Count == 1)
+            //            {
+            //                double value;
+            //                if (double.TryParse(dt.Rows[0][0].ToString(), out value))
+            //                {
+            //                    MessageBox.Show("return numeric value successfully test, result value " + value);
+            //                }
+            //                else
+            //                {
+            //                    MessageBox.Show("return not numeric value rewrite query, result value " + dt.Rows[0][0].ToString());
+            //                    IsConfigValid = false;
+            //                    return;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("return more then one row or column");
+            //                IsConfigValid = false;
+            //                return;
+            //            }
+            //        }
+            //        catch (Exception EX)
+            //        {
+            //            MessageBox.Show("Error: " + EX.Message);
+            //            IsConfigValid = false;
+            //            return;
+            //        }
+            //    }
+            //}
+            //IsConfigValid = ValidatePageConfiguration();
         }
 
         private void cmbDatabase_SelectedValueChanged(object sender, EventArgs e)
@@ -219,7 +227,7 @@ namespace ManageQueryOleDbMonitorUI
                 cmbRunAsAccount.Enabled = true;
                 if (cmbRunAsAccount.SelectedIndex != -1)
                 {
-              
+
                     sb.Append(string.Format("User Id=$RunAs[Name=\"OleDb.{0}.SimpleAuthenticationAccount\"]/UserName$;Password=$RunAs[Name=\"OleDb.{0}.SimpleAuthenticationAccount\"]/Password$", templateIdString));
                     txtConnectionString.Text = sb.ToString();
                 }
@@ -256,7 +264,7 @@ namespace ManageQueryOleDbMonitorUI
         private void SetSharedUserData()
         {
             SharedUserData["ConnectionAndQuery.TemplateIdString"] = templateIdString;
-            SharedUserData["ConnectionAndQuery.UniqueID"] = UniqueID;
+            //SharedUserData["ConnectionAndQuery.UniqueID"] = UniqueID;
             SharedUserData["ConnectionAndQuery.Instance"] = txtInstanceName.Text;
             SharedUserData["ConnectionAndQuery.Database"] = Database;
             SharedUserData["ConnectionAndQuery.Query"] = txtQuery.Text;
@@ -366,7 +374,7 @@ namespace ManageQueryOleDbMonitorUI
             {
                 // in create mode init new id
                 templateIdString = Guid.NewGuid().ToString("N");
-                UniqueID = templateIdString;
+                // UniqueID = templateIdString;
 
                 cmbDatabase.Enabled = false;
                 txtQuery.Enabled = false;
@@ -390,7 +398,7 @@ namespace ManageQueryOleDbMonitorUI
                     PopulateRunAsComboBox();
 
                     templateIdString = config.TemplateIdString;
-                    UniqueID = config.UniqueID;
+                    // UniqueID = config.UniqueID;
                     txtInstanceName.Text = config.Instance;
                     txtQuery.Text = config.Query;
                     Database = config.Database;
@@ -398,11 +406,11 @@ namespace ManageQueryOleDbMonitorUI
                     txtMetricType.Text = config.MetricType;
                     principalName = config.PrincipalName;
 
-                    cmbDatabase.Enabled = false;
-                    txtQuery.Enabled = false;
-                    btnTest.Enabled = false;
-                    rbSQLAuth.Enabled = false;
-                    rbWinAuth.Enabled = false;
+                    //cmbDatabase.Enabled = false;
+                    //txtQuery.Enabled = false;
+                    //btnTest.Enabled = false;
+                    //rbSQLAuth.Enabled = false;
+                    //rbWinAuth.Enabled = false;
                     if (string.IsNullOrEmpty(config.RunAsAccount) || config.RunAsAccount == "01020202020202020202020202020202020202020200000000000000000000000000000000000000")
                     {
                         cmbRunAsAccount.SelectedIndex = -1;
@@ -463,7 +471,7 @@ namespace ManageQueryOleDbMonitorUI
             config.Instance = txtInstanceName.Text;
             config.Database = Database;
             config.Query = txtQuery.Text;
-            config.UniqueID = UniqueID;
+            //config.UniqueID = UniqueID;
             config.MetricType = txtMetricType.Text;
             config.PrincipalName = principalName;
             if (cmbRunAsAccount.SelectedIndex >= 0)

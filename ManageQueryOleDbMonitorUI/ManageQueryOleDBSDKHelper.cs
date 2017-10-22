@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Xml;
 
 namespace ManageQueryOleDbMonitorUI
 {
@@ -33,24 +34,12 @@ namespace ManageQueryOleDbMonitorUI
 
     public class ManageQueryOleDBSDKHelper : IDisposable
     {
-        // Flag: Has Dispose already been called?
-        private bool disposed = false;
-
-        // Instantiate a SafeHandle instance.
-        private SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
         private ManagementGroup managementGroup;
 
         public ManageQueryOleDBSDKHelper(ManagementGroup managementGroup)
         {
             this.managementGroup = managementGroup;
-        }
-
-        // Public implementation of Dispose pattern callable by consumers.
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         internal IObjectReader<EnterpriseManagementObject> GetEnterpriseManagementObjects(ManagementPackClass classtype)
@@ -102,7 +91,6 @@ namespace ManageQueryOleDbMonitorUI
         {
             return managementGroup.EntityObjects.GetObjectReader<EnterpriseManagementObject>(new MonitoringObjectGenericCriteria(string.Format("Name = '{0}'", name)), cls, ObjectQueryOptions.Default);
         }
-
         internal IList<EnterpriseManagementObject> GetRelatedObjects(Guid objectID, string managementPackName, string className)
         {
             ManagementPackClass rClass = GetManagementPackClass(managementPackName, className);
@@ -116,22 +104,95 @@ namespace ManageQueryOleDbMonitorUI
             }
         }
 
-        // Protected implementation of Dispose pattern.
-        protected virtual void Dispose(bool disposing)
+        internal string RunTestTask(string connectionString, string query)
         {
-            if (disposed)
-                return;
+            ManagementPackClass AllManagementServersPoolClass =
+                GetManagementPackClass("Microsoft.SystemCenter.Library", "Microsoft.SystemCenter.AllManagementServersPool");
 
-            if (disposing)
+            IObjectReader<MonitoringObject> Targets = managementGroup.EntityObjects.GetObjectReader<MonitoringObject>(AllManagementServersPoolClass, ObjectQueryOptions.Default);
+            EnterpriseManagementObject Target = Targets.First();
+            // Get the task.
+            string TaskQuery = "Name = 'Microsoft.SystemCenter.SyntheticTransactions.OleDbPing'";
+            ManagementPackTaskCriteria taskCriteria = new ManagementPackTaskCriteria(TaskQuery);
+
+            IList<ManagementPackTask> tasks = managementGroup.TaskConfiguration.GetTasks(taskCriteria);
+            ManagementPackTask task = null;
+            if (tasks.Count == 1)
+                task = tasks[0];
+            else
+                throw new InvalidOperationException(
+                    "Error! Expected one task with: " + query);
+
+            // Use the default task configuration.
+            Microsoft.EnterpriseManagement.Runtime.TaskConfiguration config =
+                new Microsoft.EnterpriseManagement.Runtime.TaskConfiguration();
+
+            //Get OleDbTriggerProbe module to override paramters
+            ManagementPackModuleType OleDbTriggerProbeMoudule =
+                managementGroup.Monitoring.GetModuleType("System.OleDbTriggerProbe", managementGroup.ManagementPacks.GetManagementPack(SystemManagementPack.System));
+
+            ManagementPackOverrideableParameter overrideConnecionStringParam = OleDbTriggerProbeMoudule.OverrideableParameterCollection["ConnectionString"];
+            ManagementPackOverrideableParameter overrideQueryParam = OleDbTriggerProbeMoudule.OverrideableParameterCollection["Query"];
+
+
+            config.Overrides.Add(new Pair<ManagementPackOverrideableParameter, string>(overrideConnecionStringParam,
+                   connectionString
+                    ));
+            config.Overrides.Add(new Pair<ManagementPackOverrideableParameter, string>(overrideQueryParam,
+                   query
+                    ));
+
+            //execute task
+
+            IList<Microsoft.EnterpriseManagement.Runtime.TaskResult> result = managementGroup.TaskRuntime.ExecuteTask(Target, task, config);
+
+            if (result[0].ErrorCode == 0)
             {
-                handle.Dispose();
-                // Free any other managed objects here.
-                //
+                //XmlDocument xd = new XmlDocument();
+                //xd.LoadXml(result[0].Output);
+                IList<Microsoft.EnterpriseManagement.Runtime.TaskResult> results = managementGroup.TaskRuntime.GetTaskResultsByBatchId(result[0].BatchId);
+                return "Succeeded result: " + results[0].Output;
+            }
+            else
+            {
+                return "Error result: " + result[0].ErrorMessage;
             }
 
-            // Free any unmanaged objects here.
-            //
-            disposed = true;
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~ManageQueryOleDBSDKHelper() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
