@@ -6,7 +6,7 @@
     <RootNamespace>QueryOleDbMonitorTemplate</RootNamespace>
     <Name>QueryOleDbMonitorTemplate</Name>
     <ManagementPackName>QueryOleDbMonitorTemplate</ManagementPackName>
-    <Version>2.0.0.12</Version>
+    <Version>2.1.0.1</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
     <MpFrameworkProfile>OM</MpFrameworkProfile>
     <ProductVersion>1.1.0.0</ProductVersion>
@@ -79,6 +79,10 @@
     <Folder Include="Resources" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentTasks.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>AgentTasks.mptg</DependentUpon>
+    </Compile>
     <Compile Include="FoldersAndViews.mpx">
       <SubType>Code</SubType>
     </Compile>
@@ -107,6 +111,12 @@
     <EmbeddedResource Include="Resources\ManageQueryOleDbMonitorUI.dll">
       <SubType>Content</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AgentTasks.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

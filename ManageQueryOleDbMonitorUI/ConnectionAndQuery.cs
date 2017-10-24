@@ -126,64 +126,9 @@ namespace ManageQueryOleDbMonitorUI
             //
             using (ManageQueryOleDBSDKHelper helper = new ManageQueryOleDBSDKHelper(ManagementGroup))
             {
-                //SecureData sd = ManagementGroup.Security.GetSecureData(runAsAccountList[cmbRunAsAccount.SelectedIndex].AccountStorageIdByteArray);
-
                 MessageBox.Show(helper.RunTestTask(txtConnectionString.Text, txtQuery.Text));
-
             }
-            //ValidatePageConfiguration();
-            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            //sb.Append(conStr);
-            //if (rbSQLAuth.Checked)
-            //{
-            //    SecureData sd = ManagementGroup.Security.GetSecureData(runAsAccountList[cmbRunAsAccount.SelectedIndex].AccountStorageIdByteArray);
-            //    sb.Append(string.Format("User Id={0};Password={1};", sd.Name, convertToUNSecureString(sd.Data)));
-            //}
-            //else
-            //{
-            //    sb.Append("Integrated Security=SSPI;");
-            //}
 
-            //using (OleDbConnection con = new OleDbConnection(sb.ToString()))
-            //{
-            //    using (OleDbCommand cmd = new OleDbCommand(txtQuery.Text, con))
-            //    {
-            //        try
-            //        {
-            //            DataTable dt = new DataTable();
-            //            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-            //            da.Fill(dt);
-
-            //            if (dt.Rows.Count == 1 && dt.Columns.Count == 1)
-            //            {
-            //                double value;
-            //                if (double.TryParse(dt.Rows[0][0].ToString(), out value))
-            //                {
-            //                    MessageBox.Show("return numeric value successfully test, result value " + value);
-            //                }
-            //                else
-            //                {
-            //                    MessageBox.Show("return not numeric value rewrite query, result value " + dt.Rows[0][0].ToString());
-            //                    IsConfigValid = false;
-            //                    return;
-            //                }
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("return more then one row or column");
-            //                IsConfigValid = false;
-            //                return;
-            //            }
-            //        }
-            //        catch (Exception EX)
-            //        {
-            //            MessageBox.Show("Error: " + EX.Message);
-            //            IsConfigValid = false;
-            //            return;
-            //        }
-            //    }
-            //}
-            //IsConfigValid = ValidatePageConfiguration();
         }
 
         private void cmbDatabase_SelectedValueChanged(object sender, EventArgs e)
@@ -425,6 +370,7 @@ namespace ManageQueryOleDbMonitorUI
                             };
                         }
                         cmbRunAsAccount.SelectedIndex = runAsAccountList.FindIndex(match);
+                        rbSQLAuth.Checked = true;
                     }
 
                     if (string.IsNullOrEmpty(config.ConnectionString))
@@ -437,7 +383,7 @@ namespace ManageQueryOleDbMonitorUI
                         {
                             providerMatch = delegate (string provider)
                               {
-                                  return provider.Equals(config.ConnectionString.Split('=')[1]);
+                                  return provider.Equals(config.ConnectionString.Split('=')[1].Split(';')[0]);
                               };
                         }
                         cmbProvider.SelectedIndex = providers.Keys.ToList<string>().FindIndex(providerMatch);
@@ -497,7 +443,7 @@ namespace ManageQueryOleDbMonitorUI
             sb.Append(conStr);
             if (rbSQLAuth.Checked)
             {
-                btnTest.Enabled = false;
+               btnTest.Enabled = false;
                 cmbRunAsAccount.Enabled = true;
                 if (cmbRunAsAccount.SelectedIndex != -1)
                 {

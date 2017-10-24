@@ -1,4 +1,5 @@
-﻿using Microsoft.EnterpriseManagement;
+﻿using ManageQueryOleDbMonitorUI.Concrete;
+using Microsoft.EnterpriseManagement;
 using Microsoft.EnterpriseManagement.Common;
 using Microsoft.EnterpriseManagement.Configuration;
 using Microsoft.EnterpriseManagement.Monitoring;
@@ -112,7 +113,7 @@ namespace ManageQueryOleDbMonitorUI
             IObjectReader<MonitoringObject> Targets = managementGroup.EntityObjects.GetObjectReader<MonitoringObject>(AllManagementServersPoolClass, ObjectQueryOptions.Default);
             EnterpriseManagementObject Target = Targets.First();
             // Get the task.
-            string TaskQuery = "Name = 'Microsoft.SystemCenter.SyntheticTransactions.OleDbPing'";
+            string TaskQuery = "Name = 'QueryOleDbMonitorTemplate.OLEDBMontiorTESTTask'";
             ManagementPackTaskCriteria taskCriteria = new ManagementPackTaskCriteria(TaskQuery);
 
             IList<ManagementPackTask> tasks = managementGroup.TaskConfiguration.GetTasks(taskCriteria);
@@ -145,19 +146,34 @@ namespace ManageQueryOleDbMonitorUI
             //execute task
 
             IList<Microsoft.EnterpriseManagement.Runtime.TaskResult> result = managementGroup.TaskRuntime.ExecuteTask(Target, task, config);
+            XmlDocument xd = new XmlDocument();
+            xd.LoadXml(result[0].Output);
 
-            if (result[0].ErrorCode == 0)
+            return GetTestResult(xd);
+        }
+
+        private string GetTestResult(XmlDocument xd)
+        {
+            //Error check
+            if ((int.Parse(xd.SelectSingleNode("DataItem/HRResult").InnerText) != 0))
             {
-                //XmlDocument xd = new XmlDocument();
-                //xd.LoadXml(result[0].Output);
-                IList<Microsoft.EnterpriseManagement.Runtime.TaskResult> results = managementGroup.TaskRuntime.GetTaskResultsByBatchId(result[0].BatchId);
-                return "Succeeded result: " + results[0].Output;
-            }
-            else
-            {
-                return "Error result: " + result[0].ErrorMessage;
+                ErrorTest err = new ErrorTest(xd.SelectSingleNode("DataItem/ErrorDescription").InnerText);
+                return err.UiText();
             }
 
+            //check columns violation
+            if (xd.SelectNodes("DataItem/Columns").Count > 1)
+                return NumberOfColumnViolation.Instance.UiText();
+            //check rows violation
+            if (int.Parse(xd.SelectSingleNode("DataItem/RowLength").InnerText) > 1)
+                return NumberOfRowsViolation.Instance.UiText();
+            //check numerical violation
+            int val = 0;
+            if (!int.TryParse(xd.SelectSingleNode("DataItem/Columns/Column[1]").InnerText, out val))
+                return NumericalValueViolation.Instance.UiText();
+            //all 
+            SucceededTest rs = new SucceededTest(val);
+            return rs.UiText();
         }
 
         #region IDisposable Support

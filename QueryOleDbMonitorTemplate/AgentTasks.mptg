@@ -1,0 +1,21 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance20404dd4788c4b2a8acaf4580df22fc9" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomTask" Version="1.0.0.0">
+      <CustomTaskConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Accessibility>Internal</Accessibility>
+        <Id>OLEDBMontiorTESTTask</Id>
+        <DisplayName>OLEDB Montior TEST</DisplayName>
+        <Description>Description for the new agent task.</Description>
+        <Target>SC!Microsoft.SystemCenter.AllManagementServersPool</Target>
+        <Enabled>true</Enabled>
+        <Category>Maintenance</Category>
+        <Timeout>300</Timeout>
+        <Remotable>true</Remotable>
+        <ProbeActionId>PA</ProbeActionId>
+        <ProbeActionConfig>&lt;ConnectionString&gt;CONNECTIONSTRING&lt;/ConnectionString&gt;&lt;Query&gt;Query&lt;/Query&gt;&lt;GetValue&gt;true&lt;/GetValue&gt;&lt;OneRowPerItem&gt;true&lt;/OneRowPerItem&gt;&lt;QueryTimeout&gt;50&lt;/QueryTimeout&gt;&lt;GetFetchTime&gt;true&lt;/GetFetchTime&gt;</ProbeActionConfig>
+        <ProbeActionType>System!System.OleDbTriggerProbe</ProbeActionType>
+        <WriteActionId>WA</WriteActionId>
+      </CustomTaskConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>
