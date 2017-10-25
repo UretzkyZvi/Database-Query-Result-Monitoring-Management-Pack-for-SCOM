@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManageQueryOleDbMonitorUI.Concrete
+namespace ManageQueryOleDbMonitorUI.TestReport
 {
-    public class NumericalValueViolation : ITestReport
+    public class ValueViolation : ITestReport
     {
-        private static NumericalValueViolation _instance;
-        public static NumericalValueViolation Instance
+        private static ValueViolation _instance;
+        public static ValueViolation Instance
         {
             get
             {
                 if (_instance==null)
                 {
-                    _instance = new NumericalValueViolation();
+                    _instance = new ValueViolation();
                 }
                 return _instance;
             }

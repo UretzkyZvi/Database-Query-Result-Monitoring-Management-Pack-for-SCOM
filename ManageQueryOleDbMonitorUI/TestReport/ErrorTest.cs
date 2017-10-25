@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManageQueryOleDbMonitorUI.Concrete
+namespace ManageQueryOleDbMonitorUI.TestReport
 {
     public class ErrorTest : ITestReport
     {

@@ -4,23 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManageQueryOleDbMonitorUI.Concrete
+namespace ManageQueryOleDbMonitorUI.TestReport
 {
-    public class NumberOfRowsViolation: ITestReport
+    public class RowsViolation : ITestReport
     {
-        private static NumberOfRowsViolation _instance;
-        public static NumberOfRowsViolation Instance
+        private static RowsViolation _instance;
+        public static RowsViolation Instance
         {
             get
             {
                 if (_instance == null)
-                {
-                    _instance = new NumberOfRowsViolation();
-                }
+                    _instance = new RowsViolation();
                 return _instance;
             }
         }
-
+        public RowsViolation() { }
         public string UiText()
         {
             return "Number of rows violation";

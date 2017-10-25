@@ -1,4 +1,5 @@
-﻿using ManageQueryOleDbMonitorUI.Concrete;
+﻿
+using ManageQueryOleDbMonitorUI.TestReport;
 using Microsoft.EnterpriseManagement;
 using Microsoft.EnterpriseManagement.Common;
 using Microsoft.EnterpriseManagement.Configuration;
@@ -148,32 +149,31 @@ namespace ManageQueryOleDbMonitorUI
             IList<Microsoft.EnterpriseManagement.Runtime.TaskResult> result = managementGroup.TaskRuntime.ExecuteTask(Target, task, config);
             XmlDocument xd = new XmlDocument();
             xd.LoadXml(result[0].Output);
+            TestReportFactory reportTestFactory = new TestReportFactory();
 
-            return GetTestResult(xd);
+            return GetTestResult(xd, reportTestFactory).UiText();
         }
 
-        private string GetTestResult(XmlDocument xd)
+        private ITestReport GetTestResult(XmlDocument xd, TestReportFactory reportTestFactory)
         {
             //Error check
             if ((int.Parse(xd.SelectSingleNode("DataItem/HRResult").InnerText) != 0))
-            {
-                ErrorTest err = new ErrorTest(xd.SelectSingleNode("DataItem/ErrorDescription").InnerText);
-                return err.UiText();
-            }
+                reportTestFactory.CreateErrorTest(xd.SelectSingleNode("DataItem/ErrorDescription").InnerText);
 
             //check columns violation
             if (xd.SelectNodes("DataItem/Columns").Count > 1)
-                return NumberOfColumnViolation.Instance.UiText();
+                return reportTestFactory.CreateColumnValidation(xd.SelectNodes("DataItem/Columns").Count);
+
             //check rows violation
             if (int.Parse(xd.SelectSingleNode("DataItem/RowLength").InnerText) > 1)
-                return NumberOfRowsViolation.Instance.UiText();
+                reportTestFactory.CreateRowsValidation();
+
             //check numerical violation
             int val = 0;
             if (!int.TryParse(xd.SelectSingleNode("DataItem/Columns/Column[1]").InnerText, out val))
-                return NumericalValueViolation.Instance.UiText();
+                return reportTestFactory.CreateValueValidation();
             //all 
-            SucceededTest rs = new SucceededTest(val);
-            return rs.UiText();
+            return reportTestFactory.CreateTestReport(val);
         }
 
         #region IDisposable Support

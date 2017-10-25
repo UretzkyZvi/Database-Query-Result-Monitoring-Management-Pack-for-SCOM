@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManageQueryOleDbMonitorUI.Concrete
+namespace ManageQueryOleDbMonitorUI.TestReport
 {
-    class SucceededTest : ITestReport
+    public class TestReport : ITestReport
     {
         public int value { get; set; }
 
-        public SucceededTest(int value)
+        public TestReport(int value)
         {
             this.value = value;
         }
