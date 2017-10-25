@@ -156,24 +156,31 @@ namespace ManageQueryOleDbMonitorUI
 
         private ITestReport GetTestResult(XmlDocument xd, TestReportFactory reportTestFactory)
         {
-            //Error check
-            if ((int.Parse(xd.SelectSingleNode("DataItem/HRResult").InnerText) != 0))
-                reportTestFactory.CreateErrorTest(xd.SelectSingleNode("DataItem/ErrorDescription").InnerText);
+            try
+            {
+                //Error check
+                if ((int.Parse(xd.SelectSingleNode("DataItem/HRResult").InnerText) != 0))
+                    return reportTestFactory.CreateErrorTest(xd.SelectSingleNode("DataItem/ErrorDescription").InnerText);
 
-            //check columns violation
-            if (xd.SelectNodes("DataItem/Columns").Count > 1)
-                return reportTestFactory.CreateColumnValidation(xd.SelectNodes("DataItem/Columns").Count);
+                //check columns violation
+                if (xd.SelectNodes("DataItem/Columns")[0].ChildNodes.Count > 1)
+                    return reportTestFactory.CreateColumnValidation(xd.SelectNodes("DataItem/Columns").Count);
 
-            //check rows violation
-            if (int.Parse(xd.SelectSingleNode("DataItem/RowLength").InnerText) > 1)
-                reportTestFactory.CreateRowsValidation();
+                //check rows violation
+                if (int.Parse(xd.SelectSingleNode("DataItem/RowLength").InnerText) > 1)
+                    return reportTestFactory.CreateRowsValidation();
 
-            //check numerical violation
-            int val = 0;
-            if (!int.TryParse(xd.SelectSingleNode("DataItem/Columns/Column[1]").InnerText, out val))
-                return reportTestFactory.CreateValueValidation();
-            //all 
-            return reportTestFactory.CreateTestReport(val);
+                //check numerical violation
+                int val = 0;
+                if (!int.TryParse(xd.SelectSingleNode("DataItem/Columns/Column[1]").InnerText, out val))
+                    return reportTestFactory.CreateValueValidation();
+                //all 
+                return reportTestFactory.CreateTestReport(val);
+            }
+            catch (Exception ex)
+            {
+                return reportTestFactory.CreateErrorTest(ex.Message);
+            }
         }
 
         #region IDisposable Support

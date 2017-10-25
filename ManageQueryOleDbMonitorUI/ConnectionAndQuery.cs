@@ -443,7 +443,7 @@ namespace ManageQueryOleDbMonitorUI
             sb.Append(conStr);
             if (rbSQLAuth.Checked)
             {
-               btnTest.Enabled = false;
+                btnTest.Enabled = false;
                 cmbRunAsAccount.Enabled = true;
                 if (cmbRunAsAccount.SelectedIndex != -1)
                 {
