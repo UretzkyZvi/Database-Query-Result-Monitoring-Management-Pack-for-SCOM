@@ -5,7 +5,7 @@
         <xsd:element name ="Name"             type="xsd:string" />
         <xsd:element name ="Description"      type="xsd:string" />
         <xsd:element name ="TemplateIdString" type="xsd:string" />
-        <xsd:element name ="UniqueID"        type="xsd:string" />
+        <!--<xsd:element name ="UniqueID"        type="xsd:string" />-->
         <xsd:element name ="Instance"        type="xsd:string" />
         <xsd:element name ="Database"        type="xsd:string" />
         <xsd:element name ="QueryName"       type="xsd:string" />
@@ -28,7 +28,7 @@
       <References>
         <Reference ID="Self" />
         <Reference ID="System" />
-        <Reference ID="Performance" />
+        <!--<Reference ID="Performance" />-->
         <Reference ID="SC" />
         <Reference ID="SCDW" />
         <Reference ID="Health" />
@@ -68,10 +68,10 @@
                 <ClassId>$MPElement[Name="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"]$</ClassId>
                 <ClassInstanceSettings>
                   <Settings>
-                    <Setting>
+                    <!--<Setting>
                       <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/UniqueID$</Name>
                       <Value>$TemplateConfig/UniqueID$</Value>
-                    </Setting>
+                    </Setting>-->
                     <Setting>
                       <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/Instance$</Name>
                       <Value>$TemplateConfig/Instance$</Value>
@@ -155,10 +155,10 @@
                 <TargetTypeId>$MPElement[Name="OleDBQueryMonitoring.$TemplateConfig/TemplateIdString$"]$</TargetTypeId>
                 <TargetRoleSettings>
                   <Settings>
-                    <Setting>
+                    <!--<Setting>
                       <Name>$MPElement[Name="$Reference/Library$OleDBQueryMonitoring"]/UniqueID$</Name>
                       <Value>$TemplateConfig/UniqueID$</Value>
-                    </Setting>
+                    </Setting>-->
                     <Setting>
                       <Name>$MPElement[Name="$Reference/Windows$Microsoft.Windows.Computer"]/PrincipalName$</Name>
                       <Value>$TemplateConfig/PrincipalName$</Value>

@@ -64,9 +64,9 @@
                   <xsl:element name="Instance">
                     <xsl:value-of select="//Instance" />
                   </xsl:element>
-                  <xsl:element name="UniqueID">
+                  <!--<xsl:element name="UniqueID">
                     <xsl:value-of select="//UniqueID" />
-                  </xsl:element>
+                  </xsl:element>-->
                   <xsl:element name="Database">
                     <xsl:value-of select="//Database" />
                   </xsl:element>
@@ -170,9 +170,9 @@
                 <xsl:element name="TemplateIdString">
                   <xsl:value-of select="/TemplateIdString" />
                 </xsl:element>
-                <xsl:element name="UniqueID">
+                <!--<xsl:element name="UniqueID">
                   <xsl:value-of select="/UniqueID" />
-                </xsl:element>
+                </xsl:element>-->
                 <xsl:element name="Instance">
                   <xsl:value-of select="/Instance" />
                 </xsl:element>

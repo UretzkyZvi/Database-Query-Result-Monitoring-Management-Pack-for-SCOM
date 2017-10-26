@@ -245,7 +245,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:QueryOleDbMonitoring"
         "ProductCode" = "8:{12D45B75-8BC9-47F0-899E-7F1DC38DFF91}"
-        "PackageCode" = "8:{9E3F7C42-13DF-49D8-BAB5-F2F1343803AA}"
+        "PackageCode" = "8:{94B75961-41B2-4E13-98C8-CC279E68E0A8}"
         "UpgradeCode" = "8:{CBCFCC6B-FADC-4CB7-8543-35351F929F60}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

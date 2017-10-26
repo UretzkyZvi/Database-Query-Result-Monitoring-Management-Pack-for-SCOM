@@ -77,6 +77,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestReport\ErrorTest.cs" />
+    <Compile Include="TestReport\ITestReportFactory.cs" />
+    <Compile Include="TestReport\ColumnViolation.cs" />
+    <Compile Include="TestReport\RowsViolation.cs" />
+    <Compile Include="TestReport\TestReportFactory.cs" />
+    <Compile Include="TestReport\ValueViolation.cs" />
+    <Compile Include="TestReport\TestReport.cs" />
     <Compile Include="Dialog\DBEngineChooserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +105,7 @@
     <Compile Include="Dialog\GroupPickerControl.Designer.cs">
       <DependentUpon>GroupPickerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestReport\ITestReport.cs" />
     <Compile Include="RunAsAccount.cs" />
     <Compile Include="SchedulerSettings.cs">
       <SubType>UserControl</SubType>
