@@ -106,23 +106,23 @@ namespace ManageQueryOleDbMonitorUI
                         new Regex(ValueNodeRegex, RegexOptions.CultureInvariant | RegexOptions.Compiled).Matches(discovery.DataSource.Configuration);
 
                     templateConfig.TemplateIdString = GetTemplateIdString(templateContext);// matchs[0].Groups[1].Value;
-                    //templateConfig.UniqueId = Guid.Parse(matchs[0].Groups[1].Value);
-                    templateConfig.Instance = matchs[0].Groups[1].Value;
-                    templateConfig.Database = matchs[1].Groups[1].Value;
-                    templateConfig.QueryName = matchs[2].Groups[1].Value;
-                    templateConfig.StartDay = matchs[3].Groups[1].Value;
-                    templateConfig.EndDay = matchs[4].Groups[1].Value;
-                    templateConfig.SyncTime = matchs[5].Groups[1].Value;
-                    templateConfig.IntervalSeconds = int.Parse(matchs[6].Groups[1].Value);
-                    templateConfig.Query = matchs[7].Groups[1].Value;
-                    templateConfig.DaysOfWeekMask = int.Parse(matchs[8].Groups[1].Value);
-                    templateConfig.GroupName = matchs[9].Groups[1].Value;
-                    templateConfig.Direction = matchs[10].Groups[1].Value;
-                    templateConfig.ErrorMessage = matchs[11].Groups[1].Value;
-                    templateConfig.MetricType = matchs[12].Groups[1].Value;
-                    templateConfig.Samples = int.Parse(matchs[13].Groups[1].Value);
-                    templateConfig.Threshold = double.Parse(matchs[14].Groups[1].Value);
-                    templateConfig.PrincipalName = matchs[15].Groups[1].Value;
+                    templateConfig.UniqueID = matchs[0].Groups[1].Value;
+                    templateConfig.Instance = matchs[1].Groups[1].Value;
+                    templateConfig.Database = matchs[2].Groups[1].Value;
+                    templateConfig.QueryName = matchs[3].Groups[1].Value;
+                    templateConfig.StartDay = matchs[4].Groups[1].Value;
+                    templateConfig.EndDay = matchs[5].Groups[1].Value;
+                    templateConfig.SyncTime = matchs[6].Groups[1].Value;
+                    templateConfig.IntervalSeconds = int.Parse(matchs[7].Groups[1].Value);
+                    templateConfig.Query = matchs[8].Groups[1].Value;
+                    templateConfig.DaysOfWeekMask = int.Parse(matchs[9].Groups[1].Value);
+                    templateConfig.GroupName = matchs[10].Groups[1].Value;
+                    templateConfig.Direction = matchs[11].Groups[1].Value;
+                    templateConfig.ErrorMessage = matchs[12].Groups[1].Value;
+                    templateConfig.MetricType = matchs[13].Groups[1].Value;
+                    templateConfig.Samples = int.Parse(matchs[14].Groups[1].Value);
+                    templateConfig.Threshold = double.Parse(matchs[15].Groups[1].Value);
+                    templateConfig.PrincipalName = matchs[16].Groups[1].Value;
 
 
                     return;

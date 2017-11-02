@@ -19,7 +19,7 @@ namespace ManageQueryOleDbMonitorUI
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string TemplateIdString { get; set; }
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
-        public Guid UniqueId { get; set; }
+        public string UniqueID { get; set; }
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string Instance { get; set; }
         [XmlElement(Form = XmlSchemaForm.Unqualified)]

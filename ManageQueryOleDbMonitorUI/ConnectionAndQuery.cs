@@ -25,7 +25,7 @@ namespace ManageQueryOleDbMonitorUI
         private IList<EnterpriseManagementObject> Databases;
         private string principalName;
         private string templateIdString;
-        //private string UniqueID;
+        private string UniqueID;
         private Dictionary<string, string> providers;
         private List<RunAsAccount> runAsAccountList;
         private string conStr;
@@ -107,19 +107,6 @@ namespace ManageQueryOleDbMonitorUI
             }
         }
 
-        private string convertToUNSecureString(SecureString secstrPassword)
-        {
-            IntPtr unmanagedString = IntPtr.Zero;
-            try
-            {
-                unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(secstrPassword);
-                return Marshal.PtrToStringUni(unmanagedString);
-            }
-            finally
-            {
-                Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
-            }
-        }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
@@ -166,6 +153,7 @@ namespace ManageQueryOleDbMonitorUI
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(conStr);
+
             if (rbSQLAuth.Checked)
             {
                 btnTest.Enabled = false;
@@ -209,7 +197,7 @@ namespace ManageQueryOleDbMonitorUI
         private void SetSharedUserData()
         {
             SharedUserData["ConnectionAndQuery.TemplateIdString"] = templateIdString;
-            //SharedUserData["ConnectionAndQuery.UniqueID"] = UniqueID;
+            SharedUserData["ConnectionAndQuery.UniqueID"] = UniqueID;
             SharedUserData["ConnectionAndQuery.Instance"] = txtInstanceName.Text;
             SharedUserData["ConnectionAndQuery.Database"] = Database;
             SharedUserData["ConnectionAndQuery.Query"] = txtQuery.Text;
@@ -319,7 +307,7 @@ namespace ManageQueryOleDbMonitorUI
             {
                 // in create mode init new id
                 templateIdString = Guid.NewGuid().ToString("N");
-                // UniqueID = templateIdString;
+                UniqueID = Guid.NewGuid().ToString("N"); 
 
                 cmbDatabase.Enabled = false;
                 txtQuery.Enabled = false;
@@ -343,7 +331,7 @@ namespace ManageQueryOleDbMonitorUI
                     PopulateRunAsComboBox();
 
                     templateIdString = config.TemplateIdString;
-                    // UniqueID = config.UniqueID;
+                    UniqueID = config.UniqueID;
                     txtInstanceName.Text = config.Instance;
                     txtQuery.Text = config.Query;
                     Database = config.Database;
@@ -417,7 +405,7 @@ namespace ManageQueryOleDbMonitorUI
             config.Instance = txtInstanceName.Text;
             config.Database = Database;
             config.Query = txtQuery.Text;
-            //config.UniqueID = UniqueID;
+            config.UniqueID = UniqueID;
             config.MetricType = txtMetricType.Text;
             config.PrincipalName = principalName;
             if (cmbRunAsAccount.SelectedIndex >= 0)

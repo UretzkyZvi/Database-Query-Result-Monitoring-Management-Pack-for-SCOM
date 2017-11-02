@@ -3,7 +3,7 @@
     <EntityTypes>
       <ClassTypes>
         <ClassType ID="OleDBQueryMonitoring" Base="Windows!Microsoft.Windows.LocalApplication" Abstract="false" Accessibility="Public" Singleton="false" Hosted="true">
-          <!--<Property Type="string" ID ="UniqueID" Key="true" />-->
+          <Property Type="string" ID ="UniqueID" Key="true" />
           <Property Type="string" ID ="Instance" Key="false" />
           <Property Type="string" ID ="Database" Key="false" />
           <Property Type="string" ID ="QueryName" Key="false" />
@@ -45,9 +45,9 @@
         <DisplayString ElementID="OleDBQueryMonitoring">
           <Name>OleDB Query Monitoring Instance</Name>
         </DisplayString>
-        <!--<DisplayString ElementID="OleDBQueryMonitoring" SubElementID="UniqueID">
+        <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="UniqueID">
           <Name>UniqueID</Name>
-        </DisplayString>-->
+        </DisplayString>
         <DisplayString ElementID="OleDBQueryMonitoring" SubElementID="Instance">
           <Name>Instance</Name>
         </DisplayString>
