@@ -6,7 +6,7 @@
     <RootNamespace>QueryOleDbMonitorTemplate</RootNamespace>
     <Name>QueryOleDbMonitorTemplate</Name>
     <ManagementPackName>QueryOleDbMonitorTemplate</ManagementPackName>
-    <Version>2.1.0.8</Version>
+    <Version>2.2.0.0</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
     <MpFrameworkProfile>OM</MpFrameworkProfile>
     <ProductVersion>1.1.0.0</ProductVersion>
