@@ -212,14 +212,14 @@
                 <AlertPriority>Normal</AlertPriority>
                 <AlertSeverity>MatchMonitorHealth</AlertSeverity>
                 <AlertParameters>
-                  <AlertParameter1>$Data/Context/DataItem/Property[@Name='ErrorMessage']$</AlertParameter1>
-                  <AlertParameter2>$Data/Context/DataItem/Property[@Name='Value']$</AlertParameter2>
-                  <AlertParameter3>$Data/Context/DataItem/Property[@Name='MetricType']$</AlertParameter3>
-                  <AlertParameter4>$Data/Context/DataItem/Property[@Name='Direction']$</AlertParameter4>
-                  <AlertParameter5>$Data/Context/DataItem/Property[@Name='Threshold']$</AlertParameter5>
-                  <AlertParameter6>$Data/Context/DataItem/Property[@Name='QueryName']$</AlertParameter6>
-                  <AlertParameter7>$Data/Context/DataItem/Property[@Name='ConnectionString']$</AlertParameter7>
-                  <AlertParameter8>$Data/Context/DataItem/Property[@Name='Query']$</AlertParameter8>
+                  <AlertParameter1>$TemplateConfig/ErrorMessage$</AlertParameter1>
+                  <AlertParameter2>$Data/Context/SampleValue$</AlertParameter2>
+                  <AlertParameter3>$TemplateConfig/MetricType$</AlertParameter3>
+                  <AlertParameter4>$TemplateConfig/Direction$</AlertParameter4>
+                  <AlertParameter5>$TemplateConfig/Threshold$</AlertParameter5>
+                  <AlertParameter6>$TemplateConfig/QueryName$</AlertParameter6>
+                  <AlertParameter7>$TemplateConfig/ConnectionString$</AlertParameter7>
+                  <AlertParameter8>$TemplateConfig/Query$</AlertParameter8>
                 </AlertParameters>
               </AlertSettings>
               <OperationalStates>
@@ -277,16 +277,15 @@
                 <Name>Ole DB Query Unit Monitor</Name>
               </DisplayString>
               <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.AlertMessage.$TemplateConfig/TemplateIdString$">
-                <Name>Attention! The query returned a suspicious result</Name>
+                <Name>Attention! The query $TemplateConfig/QueryName$ - returned a suspicious result</Name>
                 <Description>
-                  Attention {0}!
-                  The return value {1} in {2} is {3} then {4}.
-
-                  Details
-
-                  Query Name: {5}
-                  ConnectionString: {6}
-                  Query: {7}
+                  Attention!
+                  Description: {0}.
+                  The return value {1} {2} is {3} then {4} {2}.
+                  Details:
+                          Query Name: {5}
+                          ConnectionString: {6}
+                          Query: {7}
                 </Description>
               </DisplayString>
               <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$" SubElementID="OK">

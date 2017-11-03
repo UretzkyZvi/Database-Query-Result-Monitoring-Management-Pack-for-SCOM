@@ -2,7 +2,7 @@
   <TypeDefinitions>
     <MonitorTypes>
 
-      <UnitMonitorType Accessibility="Public" ID="OleDbQueryMonitorConsecutiveUnitMonitorType" >
+      <UnitMonitorType Accessibility="Public" ID="OleDbQueryMonitorConsecutiveUnitMonitorType"  >
         <MonitorTypeStates>
           <MonitorTypeState ID="OK" />
           <MonitorTypeState ID="ERROR" />
@@ -22,24 +22,27 @@
           <xsd:element minOccurs="1" name="Direction" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="ErrorMessage" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
         </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
         <MonitorImplementation>
           <MemberModules>
-            <DataSource TypeID="OleDbQueryMonitorMapperWithDateCondtion" ID="DS">
+            <DataSource ID="Scheduler" TypeID="System!System.SimpleScheduler">
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <SyncTime>$Config/SyncTime$</SyncTime>
+            </DataSource>
+            <ProbeAction TypeID="OleDbQueryMonitorPerformanceCollectionProbe" ID="DS">
               <ConnectionString>$Config/ConnectionString$</ConnectionString>
               <Query>$Config/Query$</Query>
-              <StartDay>$Config/StartDay$</StartDay>
-              <EndDay>$Config/EndDay$</EndDay>
-              <DaysOfWeekMask>$Config/DaysOfWeekMask$</DaysOfWeekMask>
               <QueryName>$Config/QueryName$</QueryName>
-            </DataSource>
+            </ProbeAction>
             <ProbeAction TypeID="OleDbQueryMonitorPerformanceCollectionProbe" ID="ProbeOnDemand">
               <ConnectionString>$Config/ConnectionString$</ConnectionString>
               <Query>$Config/Query$</Query>
               <QueryName>$Config/QueryName$</QueryName>
             </ProbeAction>
-            <ProbeAction ID="OutputDetails" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagProbe">
+            <!--<ProbeAction ID="OutputDetails" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagProbe">
               <ScriptName>OutputDetails.ps1</ScriptName>
               <ScriptBody>
                 param($value, $threshold, $numberOfSamples,$MetricType,$LastValue,$ErrorMessage,$Direction,$QueryName,$Query,$ConnectionString)
@@ -109,7 +112,25 @@
               </Parameters>
               <TimeoutSeconds>300</TimeoutSeconds>
               <StrictErrorHandling>true</StrictErrorHandling>
-            </ProbeAction>
+            </ProbeAction>-->
+            <ConditionDetection ID="FILTERTIMER" TypeID="System!System.SchedulerFilter">
+              <SchedulerFilter>
+                <ProcessDataMode>OnSchedule</ProcessDataMode>
+                <Schedule>
+                  <WeeklySchedule>
+                    <Windows>
+                      <Daily>
+                        <Start>$Config/StartDay$</Start>
+                        <End>$Config/EndDay$</End>
+                        <DaysOfWeekMask>$Config/DaysOfWeekMask$</DaysOfWeekMask>
+                      </Daily>
+                    </Windows>
+                  </WeeklySchedule>
+                  <ExcludeDates />
+                </Schedule>
+                <UseCurrentTime>true</UseCurrentTime>
+              </SchedulerFilter>
+            </ConditionDetection>
             <ConditionDetection TypeID="Perf!System.Performance.ConsecutiveSamplesCondition" ID="Consecutive">
               <Threshold>$Config/Threshold$</Threshold>
               <Direction>$Config/Direction$</Direction>
@@ -145,18 +166,24 @@
             <RegularDetection MonitorTypeStateID="OK">
               <Node ID="ConditionOK">
                 <Node ID="Consecutive">
-                  <Node ID="DS" />
+                  <Node  ID="DS">
+                    <Node ID="Scheduler" />
+                  </Node>
                 </Node>
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="ERROR">
-              <Node ID="OutputDetails">
+              <!--<Node ID="OutputDetails">-->
                 <Node ID="ConditionError">
                   <Node ID="Consecutive">
-                    <Node ID="DS" />
+                    <Node ID="DS" >
+                      <Node  ID="FILTERTIMER">
+                        <Node ID="Scheduler" />
+                      </Node>
+                    </Node>
                   </Node>
                 </Node>
-              </Node>
+              <!--</Node>-->
             </RegularDetection>
           </RegularDetections>
           <OnDemandDetections>
@@ -168,13 +195,13 @@
               </Node>
             </OnDemandDetection>
             <OnDemandDetection MonitorTypeStateID="ERROR">
-              <Node ID="OutputDetails">
+              <!--<Node ID="OutputDetails">-->
                 <Node ID="ConditionError">
                   <Node ID="Consecutive">
                     <Node ID="ProbeOnDemand" />
                   </Node>
                 </Node>
-              </Node>
+              <!--</Node>-->
             </OnDemandDetection>
           </OnDemandDetections>
         </MonitorImplementation>

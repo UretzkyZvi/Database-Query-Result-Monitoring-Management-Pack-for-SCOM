@@ -177,7 +177,7 @@
             this.txtEndTime.Size = new System.Drawing.Size(100, 20);
             this.txtEndTime.SkipLiterals = false;
             this.txtEndTime.TabIndex = 24;
-            this.txtEndTime.Text = "0000";
+            this.txtEndTime.Text = "2359";
             this.txtEndTime.ValidatingType = typeof(System.DateTime);
             // 
             // SchedulerSettings

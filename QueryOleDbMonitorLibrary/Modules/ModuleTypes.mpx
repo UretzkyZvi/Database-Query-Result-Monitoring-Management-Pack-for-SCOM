@@ -52,6 +52,7 @@
         <OutputType>Perf!System.Performance.Data</OutputType>
       </DataSourceModuleType>
 
+
       <DataSourceModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollection" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
           <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
@@ -60,15 +61,21 @@
           <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
           <xsd:element minOccurs="1" name="QueryName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
         </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
         <ModuleImplementation>
           <Composite>
             <MemberModules>
-              <DataSource ID="PR" TypeID="OleDbQueryMonitorDataSource">
+              <DataSource ID="TIMER" TypeID="System!System.SimpleScheduler">
                 <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
                 <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="PR" TypeID="OleDbQueryMonitorOleDbProbe">
                 <ConnectionString>$Config/ConnectionString$</ConnectionString>
                 <Query>$Config/Query$</Query>
-              </DataSource>
+              </ProbeAction>
               <ConditionDetection TypeID="Perf!System.Performance.DataGenericMapper" ID="mapper">
                 <ObjectName>OleDbQueryMonitor</ObjectName>
                 <CounterName>Result</CounterName>
@@ -78,7 +85,9 @@
             </MemberModules>
             <Composition>
               <Node ID="mapper">
-                <Node ID="PR" />
+                <Node ID="PR">
+                  <Node ID="TIMER" />
+                </Node>
               </Node>
             </Composition>
           </Composite>
@@ -120,6 +129,31 @@
         </ModuleImplementation>
         <OutputType>System!System.OleDbData</OutputType>
       </DataSourceModuleType>
+
+      <ProbeActionModuleType ID="OleDbQueryMonitorOleDbProbe" Accessibility="Public" Batching="false" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
+        <Configuration>
+          <xsd:element minOccurs="1" name="ConnectionString" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Query" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="PR" TypeID="System!System.OleDbProbe">
+                <ConnectionString>$Config/ConnectionString$</ConnectionString>
+                <Query>$Config/Query$</Query>
+                <GetValue>true</GetValue>
+                <OneRowPerItem>true</OneRowPerItem>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PR"/>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.OleDbData</OutputType>
+        <InputType>System!System.TriggerData</InputType>
+      </ProbeActionModuleType>
+
 
       <ProbeActionModuleType Accessibility="Public" ID="OleDbQueryMonitorPerformanceCollectionProbe" RunAs="OleDBQueryMonitoring.PrivilegedMonitoringAccount">
         <Configuration>
