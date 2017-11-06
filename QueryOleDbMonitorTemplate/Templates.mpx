@@ -217,9 +217,7 @@
                   <AlertParameter3>$TemplateConfig/MetricType$</AlertParameter3>
                   <AlertParameter4>$TemplateConfig/Direction$</AlertParameter4>
                   <AlertParameter5>$TemplateConfig/Threshold$</AlertParameter5>
-                  <AlertParameter6>$TemplateConfig/QueryName$</AlertParameter6>
-                  <AlertParameter7>$TemplateConfig/ConnectionString$</AlertParameter7>
-                  <AlertParameter8>$TemplateConfig/Query$</AlertParameter8>
+                  <AlertParameter6>$TemplateConfig/QueryName$</AlertParameter6> 
                 </AlertParameters>
               </AlertSettings>
               <OperationalStates>
@@ -282,10 +280,6 @@
                   Attention!
                   Description: {0}.
                   The return value {1} {2} is {3} then {4} {2}.
-                  Details:
-                          Query Name: {5}
-                          ConnectionString: {6}
-                          Query: {7}
                 </Description>
               </DisplayString>
               <DisplayString ElementID="QueryOleDbMonitor.OleDBQueryUnitMonitor.$TemplateConfig/TemplateIdString$" SubElementID="OK">
