@@ -56,7 +56,7 @@
         <Monitoring>
           <Discoveries>
             <Discovery ID="QueryOleDbMonitorInitialDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring"
-                       Target="$Reference/Library$OleDBQueryMonitoringGroup" ConfirmDelivery="false" Remotable="false" Priority="Normal">
+                       Target="$Reference/Windows$Microsoft.Windows.Computer" ConfirmDelivery="false" Remotable="false" Priority="Normal">
               <Category>Discovery</Category>
               <DiscoveryTypes>
                 <DiscoveryClass TypeID="$Reference/Library$OleDBQueryMonitoring" />
