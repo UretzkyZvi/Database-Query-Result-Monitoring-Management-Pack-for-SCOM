@@ -11,7 +11,7 @@
           <Property Type="string" ID ="EndDay" Key="false" />
           <Property Type="string" ID ="SyncTime" Key="false" />
           <Property Type="int"    ID ="IntervalSeconds" Key="false" />
-          <Property Type="string" ID ="Query" Key="false" />
+          <Property Type="richtext" ID ="Query" Key="false" />
           <Property Type="int"    ID ="DaysOfWeekMask" Key="false" />
           <Property Type="string" ID ="GroupName" Key="false" />
           <Property Type="string" ID ="Direction" Key="false" />
