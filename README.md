@@ -2,7 +2,7 @@
 A Management Pack created by Uretzky Zvi for easily create monitors based SQL queries using System Center Operations Manager.
 
 IMPORTANT NOTE: The latest version of the management pack is now available for free download at
-[Free New Version](https://www.savision.com/free-management-packs/)
+[Free Management Packs - Savision](https://www.savision.com/free-management-packs/)
 
 If you use this and you like it, invite me to a coffee :-)
 
