@@ -1,4 +1,4 @@
-# OleDB query monitor
+# Database Query Result Monitoring Management Pack for SCOM
 A Management Pack created by Uretzky Zvi for easily create monitors based SQL queries using System Center Operations Manager.
 
 IMPORTANT NOTE: The latest version of the management pack is now available for free download at
