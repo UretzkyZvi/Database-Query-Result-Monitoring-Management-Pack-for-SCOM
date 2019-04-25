@@ -29,7 +29,7 @@ Please always test new management packs in a test environment before importing t
 * SCOM 2012 R2 (earlier versions are untested)
 * Microsoft SQL Management Packs.
 * SCOM Admin rights (only Administrators can import management packs)
-## Quick Start - Install
+## Quick Start - Install (Deprecated! For new version click [here](https://www.savision.com/free-management-packs/)) 
 1. Download [QueryOleDbMonitorSetup.msi](https://github.com/UretzkyZvi/Monitor-Applications-Using-SQL-Queries/releases/download/v2.2.0.1/QueryOleDbMonitorSetup.msi)
 2. Run As Administrator the MSI file.
 3. Import the management packs into SCOM. All the MPs are in C:\Program Files (x86)\QueryOleDbMonitoring\ManagmentPasks 
