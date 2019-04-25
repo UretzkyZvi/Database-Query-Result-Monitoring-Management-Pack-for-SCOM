@@ -1,8 +1,7 @@
 # Database Query Result Monitoring Management Pack for SCOM
 A Management Pack created by Uretzky Zvi for easily create monitors based SQL queries using System Center Operations Manager.
 
-## IMPORTANT NOTE: The latest version of the management pack is now available for free download at
-[Free Management Packs - Savision](https://www.savision.com/free-management-packs/)
+## IMPORTANT NOTE: The latest version of the management pack is now available for free download at [Free Management Packs - Savision](https://www.savision.com/free-management-packs/)
 
 If you use this and you like it, invite me to a coffee :-)
 
