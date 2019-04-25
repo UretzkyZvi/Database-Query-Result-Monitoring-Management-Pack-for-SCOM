@@ -1,7 +1,7 @@
 # Database Query Result Monitoring Management Pack for SCOM
 A Management Pack created by Uretzky Zvi for easily create monitors based SQL queries using System Center Operations Manager.
 
-IMPORTANT NOTE: The latest version of the management pack is now available for free download at
+## IMPORTANT NOTE: The latest version of the management pack is now available for free download at
 [Free Management Packs - Savision](https://www.savision.com/free-management-packs/)
 
 If you use this and you like it, invite me to a coffee :-)
@@ -29,7 +29,7 @@ Please always test new management packs in a test environment before importing t
 * SCOM 2012 R2 (earlier versions are untested)
 * Microsoft SQL Management Packs.
 * SCOM Admin rights (only Administrators can import management packs)
-## Quick Start - Install (Deprecated! For new version click [here](https://www.savision.com/free-management-packs/)) 
+## Quick Start - Install (Deprecated! For a new version click [here](https://www.savision.com/free-management-packs/)) 
 1. Download [QueryOleDbMonitorSetup.msi](https://github.com/UretzkyZvi/Monitor-Applications-Using-SQL-Queries/releases/download/v2.2.0.1/QueryOleDbMonitorSetup.msi)
 2. Run As Administrator the MSI file.
 3. Import the management packs into SCOM. All the MPs are in C:\Program Files (x86)\QueryOleDbMonitoring\ManagmentPasks 
